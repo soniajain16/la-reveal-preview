@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<!--
+  WEEK 2 - SOFTWARE STACK reveal landing page
+  Brand-matched to coachfoundation.com (navy + orange/gold, Poppins headings).
+  Self-contained: one Google Fonts link, tiny inline JS for the feedback widget.
+
+  TO ADD THE VIDEO: replace the .video-frame placeholder with the final <video> or embed.
+
+  FEEDBACK WIDGET WIRING (GHL): the three reaction buttons currently just show a
+  thank-you. To capture reveal-satisfaction per contact, point each button at a GHL
+  trigger link (data-href) or submit a 1-question GHL survey. Each click should tag the
+  contact, e.g. reveal-w2-fired-up / reveal-w2-good / reveal-w2-unsure.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>You have more than you think - Week 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0e1b33;--navy-2:#15264a;--accent:#f5972b;--accent-d:#e07d10;
+    --ink:#1c2333;--muted:#5b6577;--bg:#f6f8fb;--card:#fff;--line:#e7ecf3;
+    --radius:16px;--shadow:0 18px 40px -22px rgba(14,27,51,.35);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,.eyebrow{font-family:'Poppins',sans-serif}
+  .wrap{max-width:1060px;margin:0 auto;padding:0 22px}
+  .eyebrow{display:inline-block;font-size:.78rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:18px}
+
+  .hero{background:linear-gradient(160deg,var(--navy) 0%,var(--navy-2) 100%);color:#fff;padding:84px 0 70px;position:relative;overflow:hidden}
+  .hero:after{content:"";position:absolute;right:-120px;top:-120px;width:380px;height:380px;background:radial-gradient(circle,rgba(245,151,43,.22),transparent 65%);border-radius:50%}
+  .hero h1{font-size:clamp(2rem,4.6vw,3.3rem);font-weight:800;line-height:1.08;letter-spacing:-.01em;max-width:16ch}
+  .hero p.sub{margin-top:20px;font-size:clamp(1.05rem,1.7vw,1.28rem);color:#cdd7e8;max-width:56ch}
+  .cta{display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:#1a1205;font-family:'Poppins';font-weight:700;font-size:1.05rem;border:none;border-radius:999px;padding:16px 30px;margin-top:34px;cursor:pointer;text-decoration:none;transition:transform .15s,background .15s;box-shadow:0 14px 30px -12px rgba(245,151,43,.6)}
+  .cta:hover{background:var(--accent-d);transform:translateY(-2px)}
+  .cta .tri{font-size:.8rem}
+
+  section{padding:64px 0}
+  .section-head{text-align:center;max-width:60ch;margin:0 auto 40px}
+  .section-head h2{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;letter-spacing:-.01em}
+
+  .video-frame{max-width:880px;margin:0 auto;background:var(--navy);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;border:1px solid rgba(255,255,255,.06)}
+  .ratio{position:relative;width:100%;padding-top:56.25%}
+  .ratio>*{position:absolute;inset:0;width:100%;height:100%}
+  .placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;color:#9fb0cc;gap:14px;background:repeating-linear-gradient(135deg,#11203d,#11203d 18px,#13243f 18px,#13243f 36px)}
+  .play{width:74px;height:74px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;color:#1a1205;font-size:1.5rem;box-shadow:0 10px 26px -8px rgba(245,151,43,.7)}
+  .vid-cap{text-align:center;color:var(--muted);font-size:.95rem;margin-top:14px}
+
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  .feat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 20px;box-shadow:0 8px 24px -20px rgba(14,27,51,.5);position:relative}
+  .feat .ico{width:42px;height:42px;border-radius:11px;background:rgba(245,151,43,.14);color:var(--accent-d);display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:14px}
+  .feat h3{font-size:1.02rem;font-weight:600;margin-bottom:5px;line-height:1.25}
+  .feat p{color:var(--muted);font-size:.9rem}
+  .feat .on{position:absolute;top:16px;right:16px;font-size:.64rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#1f7a4d;background:#e4f6ec;padding:4px 9px;border-radius:999px}
+
+  .strip{background:var(--navy);color:#fff;text-align:center;border-radius:var(--radius);padding:46px 30px;max-width:880px;margin:0 auto}
+  .strip p{font-family:'Poppins';font-size:clamp(1.2rem,2.4vw,1.7rem);font-weight:600;line-height:1.3;max-width:30ch;margin:0 auto}
+  .strip .accent{color:var(--accent)}
+
+  /* FEEDBACK */
+  .feedback{background:#fff;border:1px solid var(--line);border-radius:var(--radius);max-width:680px;margin:0 auto;text-align:center;padding:44px 28px;box-shadow:var(--shadow)}
+  .feedback h3{font-size:1.5rem;font-weight:700;margin-bottom:6px}
+  .feedback .hint{color:var(--muted);margin-bottom:26px}
+  .reactions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .react{border:2px solid var(--line);background:#fff;border-radius:14px;padding:16px 22px;cursor:pointer;font-family:'Poppins';font-weight:600;font-size:1rem;display:flex;flex-direction:column;align-items:center;gap:8px;min-width:120px;transition:.15s}
+  .react .emo{font-size:1.9rem}
+  .react:hover{border-color:var(--accent);transform:translateY(-3px)}
+  .react.sel{border-color:var(--accent);background:rgba(245,151,43,.08)}
+  .thanks{display:none;margin-top:22px;font-family:'Poppins';font-weight:600;color:#1f7a4d}
+  .thanks.show{display:block}
+
+  footer{background:#fff;border-top:1px solid var(--line);text-align:center;padding:40px 0;color:var(--muted)}
+  footer strong{color:var(--ink)}
+  footer .next{display:inline-block;margin-top:8px;color:var(--accent-d);font-weight:600}
+
+  @media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:760px){.hero{padding:64px 0 54px}section{padding:48px 0}}
+  @media(max-width:460px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+  <header class="hero">
+    <div class="wrap">
+      <span class="eyebrow">Week 2 &middot; Your Software Stack</span>
+      <h1>You have a lot more than you think.</h1>
+      <p class="sub">Coaches usually buy these one at a time. Yours came loaded. Here is everything already switched on - take the tour.</p>
+      <a href="#video" class="cta"><span class="tri">&#9654;</span> Show me everything</a>
+    </div>
+  </header>
+
+  <section id="video">
+    <div class="wrap">
+      <div class="video-frame">
+        <div class="ratio">
+          <!-- Replace with final <video> or embed -->
+          <div class="placeholder">
+            <div class="play">&#9654;</div>
+            <span>A 90-second tour inside your own account</span>
+          </div>
+        </div>
+      </div>
+      <p class="vid-cap">A 90-second tour inside your own account.</p>
+    </div>
+  </section>
+
+  <section style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+    <div class="wrap">
+      <div class="section-head"><h2>Everything that is already yours</h2></div>
+      <div class="grid">
+        <div class="feat"><span class="on">Already on</span><div class="ico">&#9881;</div><h3>Client Acquisition System</h3><p>Your full client-getting engine, assembled.</p></div>
+        <div class="feat"><span class="on">Already on</span><div class="ico">&#127919;</div><h3>Lead-Generation Funnels</h3><p>Bring the right people in, with a free resource that turns visitors into leads.</p></div>
+        <div class="feat"><span class="on">Already on</span><div class="ico">&#9993;</div><h3>Email Nurturing + 5 Campaigns</h3><p>Written for you, working in the background.</p></div>
+        <div class="feat"><span class="on">Already on</span><div class="ico">&#129516;</div><h3>Lead Magnet</h3><p>The free resource that grows your list while you sleep.</p></div>
+        <div class="feat"><span class="on">Already on</span><div class="ico">&#9997;</div><h3>Done-For-You Sales Copy</h3><p>The words that sell, already written.</p></div>
+        <div class="feat"><span class="on">Already on</span><div class="ico">&#128197;</div><h3>Booking Funnel</h3><p>Calls book themselves, straight into your diary.</p></div>
+        <div class="feat"><span class="on">Already on</span><div class="ico">&#127760;</div><h3>Website Builder</h3><p>Your home base, ready when you want it.</p></div>
+        <div class="feat"><span class="on">Already on</span><div class="ico">&#128226;</div><h3>Posting Tool</h3><p>Schedule your content and start getting seen.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="strip">
+        <p>Bought separately, this is a stack most coaches assemble over a year. <span class="accent">You got it in week two.</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="feedback">
+        <h3>How does seeing all this feel?</h3>
+        <p class="hint">One tap. It helps us make your next reveal even better.</p>
+        <div class="reactions">
+          <!-- Wire data-href to GHL trigger links to capture per contact -->
+          <button class="react" data-reaction="fired-up"><span class="emo">&#128293;</span>Fired up</button>
+          <button class="react" data-reaction="good"><span class="emo">&#128522;</span>Good</button>
+          <button class="react" data-reaction="unsure"><span class="emo">&#128528;</span>Not sure yet</button>
+        </div>
+        <div class="thanks" id="thanks">Thank you - noted. See you next week. &#128075;</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <strong>It is all included in what you already pay.</strong>
+      <br><span class="next">Next week, we unlock the one thing you really came for.</span>
+    </div>
+  </footer>
+
+<script>
+  document.querySelectorAll('.react').forEach(function(b){
+    b.addEventListener('click',function(){
+      document.querySelectorAll('.react').forEach(function(x){x.classList.remove('sel')});
+      b.classList.add('sel');
+      document.getElementById('thanks').classList.add('show');
+      // GHL hook: if (b.dataset.href) window.location = b.dataset.href;
+      // or fire a fetch() to your survey/webhook with b.dataset.reaction
+    });
+  });
+</script>
+</body>
+</html>
