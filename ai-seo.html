@@ -4,104 +4,101 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI SEO | Coach Foundation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --cyan: #00C2FF;
-    --cyan-light: #7DE8FF;
-    --cyan-dim: rgba(0,194,255,0.10);
-    --purple: #7B5EA7;
-    --bg: #060B14;
-    --bg2: #0A1120;
-    --bg3: #0E1729;
-    --text: #EEF2F8;
-    --text-muted: #8899B4;
-    --border: rgba(0,194,255,0.15);
-    --radius: 14px;
+    --navy: #0e1b33;
+    --navy2: #15264a;
+    --accent: #f5972b;
+    --accent-d: #e07d10;
+    --muted: #5b6577;
+    --bg: #f6f8fb;
+    --card: #ffffff;
+    --line: #e7ecf3;
+    --radius: 16px;
+    --shadow: 0 18px 40px -22px rgba(14,27,51,.35);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
 
   body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    font-family: 'Inter', system-ui, sans-serif;
     background: var(--bg);
-    color: var(--text);
+    color: #1c2333;
     line-height: 1.6;
     overflow-x: hidden;
   }
 
-  h1, h2, h3 { line-height: 1.15; font-weight: 700; letter-spacing: -0.02em; }
-  h1 { font-size: clamp(2rem, 5vw, 3.75rem); }
-  h2 { font-size: clamp(1.6rem, 3.5vw, 2.75rem); }
-  h3 { font-size: clamp(1rem, 2vw, 1.2rem); font-weight: 600; }
+  h1, h2, h3 { font-family: 'Poppins', sans-serif; line-height: 1.15; letter-spacing: -0.02em; }
+  h1 { font-size: clamp(2rem, 5vw, 3.75rem); font-weight: 800; }
+  h2 { font-size: clamp(1.6rem, 3.5vw, 2.75rem); font-weight: 700; }
+  h3 { font-size: clamp(1rem, 2vw, 1.15rem); font-weight: 600; }
 
-  .cyan { color: var(--cyan); }
+  .accent { color: var(--accent); }
 
   .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
   section { padding: 96px 0; }
 
-  /* ── TOPBAR ── */
+  /* TOPBAR */
   .topbar {
-    padding: 20px 0;
-    border-bottom: 1px solid var(--border);
-    background: var(--bg);
+    padding: 18px 0;
+    border-bottom: 1px solid var(--line);
+    background: #ffffff;
     position: sticky; top: 0; z-index: 100;
-    backdrop-filter: blur(12px);
   }
   .topbar .container { display: flex; align-items: center; gap: 10px; }
   .logo-mark {
     width: 36px; height: 36px;
-    background: var(--cyan);
+    background: var(--navy);
     border-radius: 8px;
     display: flex; align-items: center; justify-content: center;
-    font-weight: 900; font-size: 14px; color: #060B14;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800; font-size: 13px; color: #ffffff;
   }
   .logo-text {
+    font-family: 'Poppins', sans-serif;
     font-size: 13px; font-weight: 600;
-    letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--text-muted);
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--navy);
   }
 
-  /* ── HERO ── */
+  /* HERO */
   .hero {
     padding: 112px 0 96px;
     text-align: center;
+    background: linear-gradient(160deg, #0e1b33, #15264a);
+    color: #ffffff;
     position: relative;
     overflow: hidden;
-    border-bottom: 1px solid var(--border);
   }
   .hero::before {
     content: '';
     position: absolute;
-    top: -40%; left: 50%;
+    top: -30%; left: 50%;
     transform: translateX(-50%);
-    width: 800px; height: 600px;
-    background: radial-gradient(ellipse, rgba(0,194,255,0.12) 0%, transparent 65%);
-    pointer-events: none;
-  }
-  .hero::after {
-    content: '';
-    position: absolute;
-    bottom: -20%; left: 30%;
-    width: 400px; height: 400px;
-    background: radial-gradient(ellipse, rgba(123,94,167,0.08) 0%, transparent 65%);
+    width: 900px; height: 600px;
+    background: radial-gradient(ellipse, rgba(245,151,43,0.12) 0%, transparent 65%);
     pointer-events: none;
   }
 
   .hero-eyebrow {
     display: inline-flex; align-items: center; gap: 8px;
-    background: var(--cyan-dim);
-    border: 1px solid var(--border);
-    border-radius: 100px;
+    background: rgba(245,151,43,0.15);
+    border: 1px solid rgba(245,151,43,0.3);
+    border-radius: 999px;
     padding: 6px 18px;
     font-size: 11px; font-weight: 700;
+    font-family: 'Poppins', sans-serif;
     letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--cyan-light);
+    color: var(--accent);
     margin-bottom: 32px;
   }
   .hero-eyebrow .dot {
     width: 6px; height: 6px;
-    background: var(--cyan);
+    background: var(--accent);
     border-radius: 50%;
     animation: pulse 2s ease-in-out infinite;
   }
@@ -110,42 +107,45 @@
     50% { opacity: 0.5; transform: scale(0.75); }
   }
 
-  .hero h1 { margin-bottom: 28px; }
+  .hero h1 { margin-bottom: 28px; color: #ffffff; }
   .hero-sub {
     font-size: clamp(1rem, 2vw, 1.2rem);
-    color: var(--text-muted);
+    color: rgba(255,255,255,0.72);
     max-width: 660px; margin: 0 auto 52px;
   }
 
   .btn-primary {
     display: inline-block;
-    background: var(--cyan);
-    color: #060B14;
+    background: var(--accent);
+    color: #1a1205;
+    font-family: 'Poppins', sans-serif;
     font-size: 1rem; font-weight: 700;
     padding: 16px 40px;
-    border-radius: 100px;
+    border-radius: 999px;
     text-decoration: none;
     letter-spacing: 0.02em;
-    transition: transform 0.15s, box-shadow 0.15s;
+    transition: background 0.15s, transform 0.15s, box-shadow 0.15s;
     border: none; cursor: pointer;
   }
   .btn-primary:hover {
+    background: var(--accent-d);
     transform: translateY(-2px);
-    box-shadow: 0 12px 32px rgba(0,194,255,0.28);
+    box-shadow: 0 12px 32px rgba(245,151,43,0.35);
   }
 
-  .btn-note { font-size: 12px; color: var(--text-muted); margin-top: 14px; display: block; }
+  .btn-note { font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 14px; display: block; }
 
-  /* ── SECTION LABELS ── */
+  /* SECTION LABELS */
   .section-label {
+    font-family: 'Poppins', sans-serif;
     font-size: 11px; font-weight: 700;
     letter-spacing: 0.15em; text-transform: uppercase;
-    color: var(--cyan); margin-bottom: 14px;
+    color: var(--accent); margin-bottom: 14px;
     display: block;
   }
 
-  /* ── SEARCH CHANGED ── */
-  .changed { background: var(--bg2); }
+  /* SEARCH CHANGED */
+  .changed { background: #ffffff; }
 
   .platforms-grid {
     display: grid;
@@ -155,48 +155,49 @@
   }
 
   .platform-card {
-    background: var(--bg3);
-    border: 1px solid var(--border);
+    background: var(--card);
+    border: 1px solid var(--line);
     border-radius: var(--radius);
     padding: 28px 24px;
+    box-shadow: var(--shadow);
     position: relative;
     overflow: hidden;
-    transition: transform 0.2s, border-color 0.2s;
+    transition: transform 0.2s, box-shadow 0.2s;
   }
-  .platform-card:hover { transform: translateY(-4px); border-color: var(--cyan); }
+  .platform-card:hover { transform: translateY(-4px); box-shadow: 0 24px 48px -20px rgba(14,27,51,.22); }
   .platform-card::before {
     content: '';
     position: absolute;
-    top: 0; left: 0; right: 0; height: 2px;
-    background: linear-gradient(90deg, var(--cyan), transparent);
+    top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--accent), transparent);
   }
 
   .platform-icon {
     width: 44px; height: 44px;
-    background: var(--cyan-dim);
-    border: 1px solid var(--border);
+    background: rgba(245,151,43,0.10);
+    border: 1px solid rgba(245,151,43,0.2);
     border-radius: 10px;
     display: flex; align-items: center; justify-content: center;
     font-size: 20px;
     margin-bottom: 16px;
   }
 
-  .platform-card h3 { margin-bottom: 10px; font-size: 1rem; }
-  .platform-card p { font-size: 0.875rem; color: var(--text-muted); line-height: 1.6; }
+  .platform-card h3 { margin-bottom: 10px; color: var(--navy); }
+  .platform-card p { font-size: 0.875rem; color: var(--muted); line-height: 1.6; }
 
   .changed-callout {
     margin-top: 40px;
-    background: var(--cyan-dim);
-    border: 1px solid var(--border);
+    background: rgba(245,151,43,0.07);
+    border: 1px solid rgba(245,151,43,0.2);
     border-radius: var(--radius);
     padding: 24px 28px;
     font-size: 1rem;
-    color: var(--text-muted);
+    color: var(--muted);
     line-height: 1.7;
   }
-  .changed-callout strong { color: var(--text); }
+  .changed-callout strong { color: #1c2333; }
 
-  /* ── RISK ── */
+  /* RISK */
   .risk { background: var(--bg); }
 
   .risk-box {
@@ -207,40 +208,31 @@
     align-items: center;
   }
 
-  .risk-text h3 {
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-    color: var(--text);
-  }
-  .risk-text p { font-size: 1rem; color: var(--text-muted); line-height: 1.75; }
+  .risk-text h3 { font-size: 1.5rem; margin-bottom: 20px; color: var(--navy); }
+  .risk-text p { font-size: 1rem; color: var(--muted); line-height: 1.75; }
 
   .risk-visual {
-    background: var(--bg3);
-    border: 1px solid rgba(217,91,91,0.2);
+    background: var(--card);
+    border: 1px solid var(--line);
     border-radius: var(--radius);
     padding: 32px 28px;
-    position: relative;
-    overflow: hidden;
-  }
-  .risk-visual::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(217,91,91,0.06) 0%, transparent 70%);
-    pointer-events: none;
+    box-shadow: var(--shadow);
   }
 
   .risk-item {
     display: flex; align-items: flex-start; gap: 14px;
     padding: 14px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid var(--line);
     font-size: 0.9rem;
   }
   .risk-item:last-child { border-bottom: none; padding-bottom: 0; }
-  .risk-item .x { color: #D95B5B; font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
-  .risk-item span { color: var(--text-muted); }
+  .risk-item .x { color: #c0392b; font-size: 1rem; flex-shrink: 0; margin-top: 1px; font-weight: 700; }
+  .risk-item span { color: var(--muted); }
 
-  /* ── WHAT WE DO ── */
-  .services { background: var(--bg2); }
+  /* WHAT WE DO */
+  .services { background: var(--navy); }
+  .services .section-label { color: var(--accent); }
+  .services h2 { color: #ffffff; }
 
   .services-grid {
     display: grid;
@@ -250,26 +242,31 @@
   }
 
   .service-card {
-    background: var(--bg3);
-    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.10);
     border-radius: var(--radius);
     padding: 28px 24px;
-    transition: transform 0.2s, border-color 0.2s;
+    transition: transform 0.2s, background 0.2s, border-color 0.2s;
   }
-  .service-card:hover { transform: translateY(-4px); border-color: var(--cyan); }
+  .service-card:hover {
+    transform: translateY(-4px);
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(245,151,43,0.4);
+  }
 
   .service-num {
+    font-family: 'Poppins', sans-serif;
     font-size: 11px; font-weight: 700;
     letter-spacing: 0.1em;
-    color: var(--cyan);
+    color: var(--accent);
     margin-bottom: 12px;
     display: block;
   }
-  .service-card h3 { margin-bottom: 10px; font-size: 1rem; }
-  .service-card p { font-size: 0.875rem; color: var(--text-muted); line-height: 1.6; }
+  .service-card h3 { margin-bottom: 10px; font-size: 1rem; color: #ffffff; }
+  .service-card p { font-size: 0.875rem; color: rgba(255,255,255,0.58); line-height: 1.6; }
 
-  /* ── WHAT YOU GET ── */
-  .outcomes { background: var(--bg); }
+  /* WHAT YOU GET */
+  .outcomes { background: #ffffff; }
 
   .outcomes-list {
     display: flex; flex-direction: column;
@@ -280,86 +277,80 @@
 
   .outcome-item {
     display: flex; align-items: flex-start; gap: 20px;
-    background: var(--bg3);
-    border: 1px solid var(--border);
+    background: var(--card);
+    border: 1px solid var(--line);
     border-radius: var(--radius);
     padding: 24px 28px;
-    transition: border-color 0.2s;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s, box-shadow 0.2s;
   }
-  .outcome-item:hover { border-color: var(--cyan); }
+  .outcome-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 24px 48px -20px rgba(14,27,51,.22);
+  }
 
   .outcome-check {
     width: 32px; height: 32px;
-    background: var(--cyan-dim);
-    border: 1px solid var(--border);
+    background: rgba(245,151,43,0.12);
+    border: 1px solid rgba(245,151,43,0.25);
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    color: var(--cyan);
+    color: var(--accent);
     font-size: 14px;
     font-weight: 700;
     flex-shrink: 0;
+    font-family: 'Poppins', sans-serif;
   }
 
-  .outcome-item p { font-size: 1rem; color: var(--text); line-height: 1.5; }
+  .outcome-item p { font-size: 1rem; color: #1c2333; line-height: 1.5; }
 
-  /* ── CTA ── */
-  .cta-section {
-    background: var(--bg2);
-    text-align: center;
-    padding: 112px 0;
-    position: relative;
-    overflow: hidden;
-    border-top: 1px solid var(--border);
-  }
-  .cta-section::before {
-    content: '';
-    position: absolute;
-    bottom: -30%; left: 50%;
-    transform: translateX(-50%);
-    width: 700px; height: 500px;
-    background: radial-gradient(ellipse, rgba(0,194,255,0.10) 0%, transparent 65%);
-    pointer-events: none;
-  }
-
-  .cta-section h2 { margin-bottom: 20px; }
-  .cta-section p {
-    font-size: 1.1rem; color: var(--text-muted);
-    max-width: 520px; margin: 0 auto 48px;
-  }
-
-  /* ── URGENCY BANNER ── */
+  /* URGENCY BANNER */
   .urgency-bar {
-    background: linear-gradient(135deg, #0A1F3C, #0D2545);
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
+    background: linear-gradient(135deg, var(--navy), var(--navy2));
     padding: 48px 0;
     text-align: center;
   }
   .urgency-bar p {
     font-size: 1.05rem;
-    color: var(--text-muted);
+    color: rgba(255,255,255,0.7);
     max-width: 640px; margin: 0 auto;
     line-height: 1.7;
   }
-  .urgency-bar p strong { color: var(--text); }
+  .urgency-bar p strong { color: #ffffff; }
 
-  /* ── FOOTER ── */
+  /* CTA */
+  .cta-section {
+    background: var(--bg);
+    text-align: center;
+    padding: 112px 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .cta-section h2 { margin-bottom: 20px; color: var(--navy); }
+  .cta-section p {
+    font-size: 1.1rem; color: var(--muted);
+    max-width: 520px; margin: 0 auto 48px;
+  }
+  .cta-section .section-label { color: var(--accent); }
+
+  /* FOOTER */
   footer {
-    border-top: 1px solid var(--border);
+    border-top: 1px solid var(--line);
+    background: #ffffff;
     padding: 32px 0;
     text-align: center;
     font-size: 12px;
-    color: var(--text-muted);
+    color: var(--muted);
   }
 
-  /* ── REVEAL ── */
+  /* REVEAL */
   .reveal {
     opacity: 0; transform: translateY(24px);
     transition: opacity 0.55s ease, transform 0.55s ease;
   }
   .reveal.visible { opacity: 1; transform: none; }
 
-  /* ── RESPONSIVE ── */
+  /* RESPONSIVE */
   @media (max-width: 768px) {
     section { padding: 72px 0; }
     .platforms-grid { grid-template-columns: 1fr; }
@@ -385,9 +376,9 @@
 <section class="hero">
   <div class="container">
     <div class="hero-eyebrow"><span class="dot"></span>Done-For-You AI Search Optimization</div>
-    <h1><span class="cyan">AI SEO</span><br>Get found inside<br>the AI answers.</h1>
+    <h1><span class="accent">AI SEO</span><br>Get your coaching business found<br>inside the AI answers.</h1>
     <p class="hero-sub">Your prospects now ask ChatGPT, Gemini, Perplexity and Google's AI before they ever reach a search page. AI SEO makes sure that when they ask, your business is the answer.</p>
-    <a href="https://buy.stripe.com/7sY3cv57x8VaaTf16Q6oo17" class="btn-primary" target="_blank" rel="noopener">Ask About AI SEO Availability</a>
+    <a href="https://buy.stripe.com/7sY3cv57x8VaaTf16Q6oo17" class="btn-primary" target="_blank" rel="noopener">Ask about AI SEO availability</a>
     <span class="btn-note">Own the AI answers before your competitors do</span>
   </div>
 </section>
@@ -396,7 +387,7 @@
 <section class="changed">
   <div class="container">
     <span class="section-label">Search Just Changed</span>
-    <h2>Your prospects are asking AI,<br>not <span class="cyan">scrolling Google</span>.</h2>
+    <h2>Your prospects are asking AI,<br>not scrolling Google.</h2>
 
     <div class="platforms-grid">
       <div class="platform-card reveal">
@@ -426,7 +417,7 @@
 <section class="risk">
   <div class="container">
     <span class="section-label">The Risk</span>
-    <h2>If the AI doesn't know you,<br>you're <span class="cyan">invisible</span> - overnight.</h2>
+    <h2>If the AI doesn't know you,<br>you're invisible - overnight.</h2>
 
     <div class="risk-box">
       <div class="risk-text reveal">
@@ -460,7 +451,7 @@
 <section class="services">
   <div class="container">
     <span class="section-label">What We Do - Done For You</span>
-    <h2>We make your business<br><span class="cyan">recognizable to the AI</span>.</h2>
+    <h2>We make your business<br>recognizable to the AI.</h2>
 
     <div class="services-grid">
       <div class="service-card reveal">
@@ -501,7 +492,7 @@
 <section class="outcomes">
   <div class="container">
     <span class="section-label">What You Get</span>
-    <h2>Visibility where the next<br>decade of search is <span class="cyan">happening</span>.</h2>
+    <h2>Visibility where the next<br>decade of search is happening.</h2>
 
     <div class="outcomes-list">
       <div class="outcome-item reveal">
@@ -535,9 +526,9 @@
 <section class="cta-section">
   <div class="container">
     <span class="section-label">Next Step</span>
-    <h2>Own the AI answers<br>before your <span class="cyan">competitors do</span>.</h2>
-    <p>Ask about current availability and onboarding for AI SEO. Spots are limited to ensure quality across every client we take on.</p>
-    <a href="https://buy.stripe.com/7sY3cv57x8VaaTf16Q6oo17" class="btn-primary" target="_blank" rel="noopener">Ask About AI SEO Availability</a>
+    <h2>Own the AI answers<br>before your competitors do.</h2>
+    <p>AI search rewards whoever builds authority first. The coaches who get recognized now will be the default answer for years. Ask about current availability and onboarding for AI SEO.</p>
+    <a href="https://buy.stripe.com/7sY3cv57x8VaaTf16Q6oo17" class="btn-primary" target="_blank" rel="noopener">Ask about AI SEO availability</a>
   </div>
 </section>
 

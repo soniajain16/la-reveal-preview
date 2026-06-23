@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Launch Marketing Accelerator | Coach Foundation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0e1b33;
+    --navy2: #15264a;
+    --accent: #f5972b;
+    --accent-d: #e07d10;
+    --muted: #5b6577;
+    --bg: #f6f8fb;
+    --card: #ffffff;
+    --line: #e7ecf3;
+    --radius: 16px;
+    --shadow: 0 18px 40px -22px rgba(14,27,51,.35);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    color: #1c2333;
+    background: #f6f8fb;
+    line-height: 1.65;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Poppins', sans-serif;
+  }
+
+  /* TOPBAR */
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #ffffff;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    padding: 0 32px;
+    height: 64px;
+    gap: 14px;
+  }
+
+  .topbar-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+
+  .logo-mark {
+    width: 36px;
+    height: 36px;
+    background: var(--navy);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    flex-shrink: 0;
+  }
+
+  .logo-name {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--navy);
+  }
+
+  .topbar-divider {
+    width: 1px;
+    height: 22px;
+    background: var(--line);
+    margin: 0 2px;
+  }
+
+  .topbar-product {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--muted);
+  }
+
+  .topbar-cta {
+    margin-left: auto;
+    background: var(--accent);
+    color: #1a1205;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    border: none;
+    border-radius: 999px;
+    padding: 9px 22px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.2s;
+  }
+
+  .topbar-cta:hover { background: var(--accent-d); }
+
+  /* SCARCITY BADGE */
+  .scarcity-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(239,68,68,0.10);
+    border: 1px solid rgba(239,68,68,0.2);
+    color: #dc2626;
+    border-radius: 999px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    padding: 5px 14px;
+    letter-spacing: 0.3px;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(160deg, #0e1b33, #15264a);
+    color: #ffffff;
+    padding: 96px 24px 80px;
+    text-align: center;
+  }
+
+  .hero-eyebrow {
+    margin-bottom: 20px;
+  }
+
+  .hero h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.12;
+    letter-spacing: -0.5px;
+    margin-bottom: 20px;
+  }
+
+  .hero h1 span {
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: rgba(255,255,255,0.82);
+    max-width: 620px;
+    margin: 0 auto 18px;
+    font-weight: 400;
+  }
+
+  .hero-desc {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.65);
+    max-width: 580px;
+    margin: 0 auto 36px;
+  }
+
+  .hero-cta {
+    display: inline-block;
+    background: var(--accent);
+    color: #1a1205;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    border-radius: 999px;
+    padding: 16px 36px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    box-shadow: 0 8px 24px rgba(245,151,43,0.35);
+  }
+
+  .hero-cta:hover { background: var(--accent-d); transform: translateY(-2px); }
+
+  /* SECTIONS */
+  .section-white { background: #ffffff; }
+  .section-bg { background: #f6f8fb; }
+
+  .section {
+    padding: 80px 24px;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+    font-weight: 800;
+    line-height: 1.18;
+    color: var(--navy);
+    margin-bottom: 16px;
+  }
+
+  .section-intro {
+    font-size: 1.05rem;
+    color: var(--muted);
+    max-width: 680px;
+    margin-bottom: 48px;
+  }
+
+  /* CARDS */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 28px 28px;
+  }
+
+  .card-grid {
+    display: grid;
+    gap: 20px;
+  }
+
+  .card-grid-2 { grid-template-columns: repeat(2, 1fr); }
+  .card-grid-3 { grid-template-columns: repeat(3, 1fr); }
+
+  @media (max-width: 640px) {
+    .card-grid-2, .card-grid-3 { grid-template-columns: 1fr; }
+  }
+
+  /* PAIN LIST */
+  .pain-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 32px;
+  }
+
+  .pain-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 1rem;
+    color: #1c2333;
+  }
+
+  .pain-icon {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: rgba(239,68,68,0.10);
+    border: 1px solid rgba(239,68,68,0.2);
+    color: #dc2626;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* STEP LIST */
+  .steps {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 8px;
+  }
+
+  .step {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 20px 22px;
+  }
+
+  .step-num {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--navy);
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .step-text h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 2px;
+  }
+
+  .step-text p {
+    font-size: 0.93rem;
+    color: var(--muted);
+  }
+
+  /* OUTCOME CARDS */
+  .outcome-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 28px;
+    text-align: center;
+  }
+
+  .outcome-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: rgba(245,151,43,0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    margin: 0 auto 16px;
+  }
+
+  .outcome-card h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+
+  .outcome-card p {
+    font-size: 0.93rem;
+    color: var(--muted);
+  }
+
+  /* STAT CARDS */
+  .stat-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 32px 24px;
+    text-align: center;
+  }
+
+  .stat-number {
+    font-family: 'Poppins', sans-serif;
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .stat-label {
+    font-size: 0.9rem;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  /* CALLOUT */
+  .callout {
+    background: rgba(245,151,43,0.08);
+    border: 1px solid rgba(245,151,43,0.25);
+    border-radius: var(--radius);
+    padding: 24px 28px;
+    margin-top: 40px;
+    font-size: 0.97rem;
+    color: var(--navy);
+    font-style: italic;
+  }
+
+  /* PRICING */
+  .pricing-card {
+    background: var(--card);
+    border: 2px solid var(--accent);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 40px 36px;
+    max-width: 560px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .price-was {
+    font-size: 0.95rem;
+    color: var(--muted);
+    text-decoration: line-through;
+    margin-bottom: 6px;
+  }
+
+  .price-now {
+    font-family: 'Poppins', sans-serif;
+    font-size: 3.2rem;
+    font-weight: 800;
+    color: var(--navy);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .price-label {
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-bottom: 28px;
+  }
+
+  .includes-list {
+    list-style: none;
+    text-align: left;
+    margin-bottom: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .includes-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.97rem;
+  }
+
+  .check-icon {
+    color: #16a34a;
+    font-size: 16px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .addon-box {
+    background: #f6f8fb;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 24px;
+    text-align: left;
+    font-size: 0.92rem;
+    color: var(--muted);
+  }
+
+  .addon-box strong {
+    color: var(--navy);
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .cta-btn {
+    display: inline-block;
+    background: var(--accent);
+    color: #1a1205;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    border-radius: 999px;
+    padding: 16px 36px;
+    text-decoration: none;
+    width: 100%;
+    transition: background 0.2s, transform 0.15s;
+    box-shadow: 0 8px 24px rgba(245,151,43,0.3);
+  }
+
+  .cta-btn:hover { background: var(--accent-d); transform: translateY(-2px); }
+
+  /* FAQ */
+  .faq-item {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 26px 28px;
+  }
+
+  .faq-q {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--navy);
+    margin-bottom: 10px;
+  }
+
+  .faq-a {
+    font-size: 0.95rem;
+    color: var(--muted);
+  }
+
+  .fit-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .fit-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.95rem;
+    color: var(--muted);
+  }
+
+  /* FINAL CTA */
+  .final-cta {
+    background: linear-gradient(160deg, #0e1b33, #15264a);
+    padding: 96px 24px;
+    text-align: center;
+    color: #ffffff;
+  }
+
+  .final-cta h2 {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 800;
+    margin-bottom: 14px;
+  }
+
+  .final-cta h2 span { color: var(--accent); }
+
+  .final-cta p {
+    color: rgba(255,255,255,0.72);
+    font-size: 1.05rem;
+    max-width: 500px;
+    margin: 0 auto 36px;
+  }
+
+  .final-includes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 40px;
+  }
+
+  .final-tag {
+    background: rgba(255,255,255,0.10);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 999px;
+    padding: 7px 18px;
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.85);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+  }
+
+  /* REVEAL ANIMATION */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 768px) {
+    .section { padding: 56px 20px; }
+    .hero { padding: 72px 20px 60px; }
+    .final-cta { padding: 72px 20px; }
+    .topbar { padding: 0 20px; }
+    .logo-name { display: none; }
+    .topbar-divider, .topbar-product { display: none; }
+    .pricing-card { padding: 28px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <a href="#" class="topbar-logo">
+    <div class="logo-mark">CF</div>
+    <span class="logo-name">Coach Foundation</span>
+  </a>
+  <div class="topbar-divider"></div>
+  <span class="topbar-product">Launch Marketing Accelerator</span>
+  <a href="https://buy.stripe.com/7sY3cv57x8VaaTf16Q6oo17" target="_blank" rel="noopener" class="topbar-cta">Claim Your Spot</a>
+</header>
+
+<!-- SLIDE 1: HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-eyebrow reveal">
+      <span class="scarcity-badge">&#9679; LIMITED BETA COHORT – ONLY 5 SPOTS</span>
+    </div>
+    <h1 class="reveal">LAUNCH MARKETING <span>ACCELERATOR</span></h1>
+    <p class="hero-sub reveal">Done-for-you leads &amp; authority. We find the opportunities – you take them.</p>
+    <p class="hero-desc reveal">A 90-day done-for-you outreach campaign with 10 guaranteed podcast opportunities. We do the research, outreach and pitching, secure the host's interest, then hand each opportunity straight to you.</p>
+    <a href="https://buy.stripe.com/7sY3cv57x8VaaTf16Q6oo17" target="_blank" rel="noopener" class="hero-cta reveal">Claim Your Beta Spot &rarr;</a>
+  </div>
+</section>
+
+<!-- SLIDE 2: PROBLEM -->
+<section class="section section-white">
+  <div class="container">
+    <p class="section-label reveal">The Real Bottleneck</p>
+    <h2 class="section-title reveal">A funnel does nothing if no one credible is sending people to it.</h2>
+    <p class="section-intro reveal">Once your system is built, the next challenge is traffic and trust. Cold ads are expensive and slow. What actually moves the needle is borrowed authority – getting in front of other people's warm audiences. That's exactly what this does – so you never have to do the research, outreach or pitching yourself.</p>
+    <ul class="pain-list">
+      <li class="reveal"><span class="pain-icon">&#10005;</span> No predictable source of qualified leads</li>
+      <li class="reveal"><span class="pain-icon">&#10005;</span> No authority assets to point prospects to</li>
+      <li class="reveal"><span class="pain-icon">&#10005;</span> Cold outreach feels awkward and never gets done</li>
+      <li class="reveal"><span class="pain-icon">&#10005;</span> No time to research and pitch partners or podcasts</li>
+      <li class="reveal"><span class="pain-icon">&#10005;</span> Calls aren't getting booked consistently</li>
+    </ul>
+  </div>
+</section>
+
+<!-- SLIDE 3: WHAT IT IS -->
+<section class="section section-bg">
+  <div class="container">
+    <p class="section-label reveal">What It Is</p>
+    <h2 class="section-title reveal">90 days of done-for-you JV partner marketing &amp; authority positioning.</h2>
+    <p class="section-intro reveal">We run a partner-driven outreach campaign for you. We find the right partners and podcasts, reach out, pitch you and secure the host's interest – then introduce you and hand the opportunity straight over. You take the conversation from there.</p>
+    <div class="card-grid card-grid-2 reveal">
+      <div class="outcome-card">
+        <div class="outcome-icon">&#127919;</div>
+        <h3>Lead Generation</h3>
+        <p>A steady stream of qualified opportunities handed directly to you – no research or cold outreach required.</p>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-icon">&#127775;</div>
+        <h3>Authority Positioning</h3>
+        <p>Featured on shows and stages that build your credibility and give you assets that work long after 90 days.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 4: HOW IT WORKS -->
+<section class="section section-white">
+  <div class="container">
+    <p class="section-label reveal">How It Works</p>
+    <h2 class="section-title reveal">We do the hard part – then hand you the opportunity.</h2>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num">1</div>
+        <div class="step-text">
+          <h3>Research</h3>
+          <p>We find the right JV partners and podcasts for your niche – people whose audience already wants what you offer.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">2</div>
+        <div class="step-text">
+          <h3>Outreach</h3>
+          <p>We reach out and open the conversation for you – no awkward cold DMs from your account.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">3</div>
+        <div class="step-text">
+          <h3>Pitch</h3>
+          <p>We pitch you and your story to the host, positioning you as the right guest for their audience.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">4</div>
+        <div class="step-text">
+          <h3>Secure the Yes</h3>
+          <p>We get the host's interest confirmed before we bring you into the conversation.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">5</div>
+        <div class="step-text">
+          <h3>Warm Introduction</h3>
+          <p>We introduce you directly to the host – you step in at the best possible moment.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">6</div>
+        <div class="step-text">
+          <h3>Over to You</h3>
+          <p>You take the opportunity forward from there – it's yours. We've done everything up to this point.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 5: GUARANTEE -->
+<section class="section section-bg">
+  <div class="container">
+    <p class="section-label reveal">The Guarantee</p>
+    <h2 class="section-title reveal">10 podcast opportunities – guaranteed.</h2>
+    <div class="card-grid card-grid-3 reveal">
+      <div class="stat-card">
+        <div class="stat-number">10</div>
+        <div class="stat-label">Guaranteed podcast opportunities we open for you</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">90</div>
+        <div class="stat-label">Days of done-for-you outreach &amp; introductions</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">0</div>
+        <div class="stat-label">Research, outreach or pitching you do yourself</div>
+      </div>
+    </div>
+    <div class="callout reveal">
+      "Borrowed authority compounds. Every opportunity you take becomes a credibility asset you can use across your funnel, sales calls and content – long after the 90 days are over."
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 6: OFFER -->
+<section class="section section-white">
+  <div class="container">
+    <p class="section-label reveal" style="text-align:center">The Beta Offer</p>
+    <h2 class="section-title reveal" style="text-align:center">Normally $15,000–$20,000. Beta clients get it for $1,997.</h2>
+    <div class="pricing-card reveal">
+      <p class="price-was">Was $15,000–$20,000</p>
+      <p class="price-now">$1,997</p>
+      <p class="price-label">Beta pricing – limited spots</p>
+      <ul class="includes-list">
+        <li><span class="check-icon">&#10003;</span> 90-day done-for-you outreach campaign</li>
+        <li><span class="check-icon">&#10003;</span> 10 guaranteed podcast opportunities</li>
+        <li><span class="check-icon">&#10003;</span> Research, outreach, pitching &amp; warm introductions – all handled</li>
+        <li><span class="check-icon">&#10003;</span> We open the opportunities – you take them forward</li>
+      </ul>
+      <div class="addon-box">
+        <strong>Optional Add-on: Lead Nurturing</strong> &nbsp;+$997<br>
+        Ongoing nurture sequences to keep warm leads moving toward a booking.
+      </div>
+      <a href="https://buy.stripe.com/7sY3cv57x8VaaTf16Q6oo17" target="_blank" rel="noopener" class="cta-btn">Claim Your Beta Spot &rarr;</a>
+      <p style="margin-top:16px;font-size:0.85rem;color:var(--muted)">Only five beta spots in this round – once they're filled, the beta price closes.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 7: FAQ -->
+<section class="section section-bg">
+  <div class="container">
+    <p class="section-label reveal">Common Questions</p>
+    <h2 class="section-title reveal">Is this right for you?</h2>
+    <ul class="fit-list" style="margin-bottom:40px">
+      <li class="reveal"><span class="check-icon">&#10003;</span> You have an offer and can take conversations we open for you</li>
+      <li class="reveal"><span class="check-icon">&#10003;</span> You want authority and leads without learning outreach yourself</li>
+      <li class="reveal"><span class="check-icon">&#10003;</span> You're ready to show up consistently for 90 days</li>
+    </ul>
+    <div class="card-grid card-grid-2" style="gap:20px">
+      <div class="faq-item reveal">
+        <p class="faq-q">Why is it only $1,997?</p>
+        <p class="faq-a">This is a beta round. We're proving the system and collecting results. You're getting a $15k+ campaign at a fraction of the price for being an early client and trusting us with your positioning.</p>
+      </div>
+      <div class="faq-item reveal">
+        <p class="faq-q">What if an opportunity doesn't convert?</p>
+        <p class="faq-a">We guarantee the opportunities and warm introductions – getting the conversation started is our job. Taking each opportunity forward is yours. The authority you build makes every subsequent one easier and more valuable.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 8: FINAL CTA -->
+<section class="final-cta">
+  <div class="container">
+    <div class="hero-eyebrow reveal" style="margin-bottom:20px">
+      <span class="scarcity-badge">&#9679; ONLY 5 BETA SPOTS REMAINING</span>
+    </div>
+    <h2 class="reveal">Five beta spots. A $15k+ campaign <span>for $1,997.</span></h2>
+    <p class="reveal">Everything done for you – research, outreach, pitching, introductions. You just take the opportunity forward.</p>
+    <div class="final-includes reveal">
+      <span class="final-tag">90-day DFY JV partner marketing</span>
+      <span class="final-tag">10 guaranteed podcast opportunities</span>
+      <span class="final-tag">Research &amp; outreach handled</span>
+      <span class="final-tag">Warm introductions included</span>
+    </div>
+    <a href="https://buy.stripe.com/7sY3cv57x8VaaTf16Q6oo17" target="_blank" rel="noopener" class="hero-cta reveal">Claim Your Beta Spot &rarr;</a>
+  </div>
+</section>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
