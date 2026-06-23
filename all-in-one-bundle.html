@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The All-In-One Coaching Business Engine | Coach Foundation</title>
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E4C97A;
+    --gold-dim: rgba(201,168,76,0.12);
+    --bg: #08080E;
+    --bg2: #0F0F1A;
+    --bg3: #14141F;
+    --text: #F0EDE6;
+    --text-muted: #9A9587;
+    --border: rgba(201,168,76,0.18);
+    --radius: 14px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── TYPOGRAPHY ── */
+  h1, h2, h3 { line-height: 1.15; font-weight: 700; letter-spacing: -0.02em; }
+  h1 { font-size: clamp(2rem, 5vw, 3.75rem); }
+  h2 { font-size: clamp(1.6rem, 3.5vw, 2.75rem); }
+  h3 { font-size: clamp(1.1rem, 2vw, 1.35rem); font-weight: 600; }
+
+  .gold { color: var(--gold); }
+  .gold-line {
+    display: inline-block;
+    width: 48px; height: 3px;
+    background: var(--gold);
+    border-radius: 2px;
+    margin-bottom: 20px;
+  }
+
+  /* ── LAYOUT ── */
+  .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+  section { padding: 96px 0; }
+
+  /* ── LOGO BAR ── */
+  .topbar {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+  }
+  .topbar .container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .logo-mark {
+    width: 36px; height: 36px;
+    background: var(--gold);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900;
+    font-size: 14px;
+    color: #08080E;
+    letter-spacing: 0;
+  }
+  .logo-text {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 112px 0 96px;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% -10%, rgba(201,168,76,0.10) 0%, transparent 70%),
+      var(--bg);
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--gold-dim);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 6px 16px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 32px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .hero h1 { margin-bottom: 28px; }
+  .hero h1 span { color: var(--gold); }
+
+  .hero-sub {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: var(--text-muted);
+    max-width: 680px;
+    margin: 0 auto 48px;
+  }
+
+  .hero-cta-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    background: var(--gold);
+    color: #08080E;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 16px 40px;
+    border-radius: 100px;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: transform 0.15s, box-shadow 0.15s;
+    border: none; cursor: pointer;
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(201,168,76,0.3);
+  }
+
+  .btn-note {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  /* ── PROBLEM ── */
+  .problem { background: var(--bg2); }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 14px;
+    display: block;
+  }
+
+  .problem-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 56px;
+    align-items: start;
+  }
+
+  .problem-intro { font-size: 1.15rem; color: var(--text-muted); margin-top: 20px; }
+
+  .pain-list { list-style: none; margin-top: 48px; display: flex; flex-direction: column; gap: 16px; }
+  .pain-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+  }
+  .pain-list li::before {
+    content: '✗';
+    color: #D95B5B;
+    font-size: 1rem;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* ── WHATS INCLUDED ── */
+  .included { background: var(--bg); }
+
+  .included-intro {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    margin-top: 16px;
+    max-width: 600px;
+  }
+
+  .systems-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 56px;
+  }
+
+  .system-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px 24px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .system-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--gold);
+  }
+  .system-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+  }
+
+  .system-icon {
+    width: 40px; height: 40px;
+    background: var(--gold-dim);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    margin-bottom: 16px;
+    border: 1px solid var(--border);
+  }
+
+  .system-card h3 { margin-bottom: 10px; font-size: 1rem; }
+  .system-card p { font-size: 0.875rem; color: var(--text-muted); line-height: 1.55; }
+
+  /* ── VALUE STACK ── */
+  .value-stack { background: var(--bg2); }
+
+  .value-intro { font-size: 1.1rem; color: var(--text-muted); margin-top: 16px; }
+
+  .value-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 48px;
+  }
+  .value-table thead {
+    border-bottom: 1px solid var(--border);
+  }
+  .value-table th {
+    padding: 14px 20px;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .value-table th:last-child { text-align: right; }
+  .value-table td {
+    padding: 18px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 0.95rem;
+  }
+  .value-table td:last-child {
+    text-align: right;
+    font-weight: 700;
+    color: var(--gold-light);
+    white-space: nowrap;
+  }
+  .value-table tbody tr:hover { background: rgba(255,255,255,0.02); }
+
+  .value-total-row {
+    background: var(--gold-dim) !important;
+    border-top: 1px solid var(--border) !important;
+    border-radius: var(--radius);
+  }
+  .value-total-row td {
+    font-weight: 700;
+    font-size: 1.05rem;
+    border-bottom: none !important;
+  }
+  .value-total-row td:last-child {
+    font-size: 1.3rem;
+    color: var(--gold) !important;
+  }
+
+  /* ── COMPARISON ── */
+  .comparison { background: var(--bg); }
+
+  .comp-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 56px;
+  }
+
+  .comp-card {
+    border-radius: var(--radius);
+    padding: 36px 32px;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .comp-card.bad {
+    background: rgba(217, 91, 91, 0.05);
+    border-color: rgba(217, 91, 91, 0.2);
+  }
+  .comp-card.good {
+    background: var(--gold-dim);
+    border-color: var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  .comp-card.good::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% -20%, rgba(201,168,76,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .comp-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 100px;
+    margin-bottom: 24px;
+  }
+  .bad .comp-badge { background: rgba(217, 91, 91, 0.15); color: #D95B5B; }
+  .good .comp-badge { background: rgba(201, 168, 76, 0.2); color: var(--gold); }
+
+  .comp-card h3 { font-size: 1.3rem; margin-bottom: 24px; }
+  .bad h3 { color: var(--text-muted); }
+
+  .comp-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+  .comp-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 0.95rem;
+  }
+  .comp-list li .icon { flex-shrink: 0; width: 20px; text-align: center; }
+  .bad .comp-list li .icon { color: #D95B5B; }
+  .good .comp-list li .icon { color: var(--gold); }
+
+  .comp-price {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    font-size: 1.4rem;
+    font-weight: 800;
+  }
+  .bad .comp-price { color: #D95B5B; }
+  .good .comp-price { color: var(--gold); }
+  .comp-price-note { font-size: 0.75rem; font-weight: 400; color: var(--text-muted); margin-top: 4px; }
+
+  /* ── STATS BAR ── */
+  .stats-bar {
+    background: var(--gold);
+    padding: 56px 0;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    text-align: center;
+  }
+
+  .stat-number {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 800;
+    color: #08080E;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.875rem;
+    color: rgba(8,8,14,0.7);
+    margin-top: 8px;
+    font-weight: 500;
+  }
+  .stat-divider {
+    width: 1px;
+    background: rgba(8,8,14,0.2);
+    height: auto;
+  }
+
+  /* ── OFFER ── */
+  .offer { background: var(--bg2); text-align: center; }
+
+  .offer-card {
+    max-width: 620px;
+    margin: 56px auto 0;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 52px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .offer-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .offer-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(201,168,76,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .offer-badge {
+    display: inline-block;
+    background: var(--gold-dim);
+    border: 1px solid var(--border);
+    color: var(--gold);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 100px;
+    margin-bottom: 28px;
+  }
+
+  .offer-card h2 { margin-bottom: 24px; font-size: clamp(1.5rem, 3vw, 2.2rem); }
+
+  .offer-includes {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 36px;
+    text-align: left;
+  }
+  .offer-includes li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+  }
+  .offer-includes li::before {
+    content: '✓';
+    color: var(--gold);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .price-block {
+    border-top: 1px solid var(--border);
+    padding-top: 32px;
+    margin-bottom: 32px;
+  }
+
+  .price-value-line {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    text-decoration: line-through;
+    margin-bottom: 8px;
+  }
+
+  .price-main {
+    font-size: clamp(3rem, 6vw, 4.5rem);
+    font-weight: 800;
+    color: var(--gold);
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+
+  .price-sub { font-size: 0.9rem; color: var(--text-muted); margin-top: 8px; }
+
+  .offer-card .btn-primary {
+    width: 100%;
+    font-size: 1.05rem;
+    padding: 18px 40px;
+  }
+
+  .offer-footnote {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 16px;
+  }
+
+  /* ── FINAL CTA ── */
+  .final-cta {
+    background:
+      radial-gradient(ellipse 70% 80% at 50% 110%, rgba(201,168,76,0.10) 0%, transparent 70%),
+      var(--bg);
+    text-align: center;
+    padding: 120px 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .final-cta h2 { margin-bottom: 20px; }
+  .final-cta p { font-size: 1.1rem; color: var(--text-muted); max-width: 520px; margin: 0 auto 48px; }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 0;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  /* ── REVEAL ANIMATIONS ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    section { padding: 72px 0; }
+    .problem-grid { grid-template-columns: 1fr; }
+    .systems-grid { grid-template-columns: 1fr 1fr; }
+    .comp-grid { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: 1fr; gap: 40px; }
+    .stat-divider { display: none; }
+    .offer-card { padding: 36px 24px; }
+  }
+
+  @media (max-width: 480px) {
+    .systems-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<nav class="topbar">
+  <div class="container">
+    <div class="logo-mark">CF</div>
+    <span class="logo-text">Coach Foundation</span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-eyebrow">The Complete Done-For-You Stack</div>
+    <h1>The <span>All-In-One</span><br>Coaching Business Engine</h1>
+    <p class="hero-sub">Every system your coaching business needs - in one bundle. Launch Accelerator, Automated Course &amp; Funnel, three AI Custom Builds, Launch Marketing, Media On Demand, and AI SEO - assembled into one complete done-for-you engine.</p>
+    <div class="hero-cta-group">
+      <a href="#offer" class="btn-primary">Build My Engine</a>
+      <span class="btn-note">$55,000+ in value &nbsp;&bull;&nbsp; One investment</span>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="problem">
+  <div class="container">
+    <span class="section-label">The Problem</span>
+    <h2>Coaches buy pieces.<br>What grows a business is<br>the <span class="gold">whole engine</span>.</h2>
+    <div class="problem-grid">
+      <div class="reveal">
+        <p class="problem-intro">A funnel without traffic stalls. Traffic without authority gets ignored. Authority without a product to sell leaves money on the table. The parts only compound when they work together.</p>
+        <br><br>
+        <p class="problem-intro">The All-In-One bundle assembles every layer - build, traffic, authority, product and AI leverage - into a single done-for-you system.</p>
+      </div>
+      <ul class="pain-list reveal">
+        <li>A funnel, but no consistent source of leads</li>
+        <li>Leads, but no authority to convert them</li>
+        <li>Authority, but no scalable product to sell</li>
+        <li>Tools, but nothing built around their business</li>
+        <li>Five vendors and five invoices instead of one engine</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT'S INCLUDED -->
+<section class="included">
+  <div class="container">
+    <span class="section-label">Everything In The Bundle</span>
+    <h2>Six systems.<br>One complete coaching<br>business <span class="gold">engine</span>.</h2>
+    <p class="included-intro">Each system is built to work with every other. Not six products - one machine.</p>
+    <div class="systems-grid">
+
+      <div class="system-card reveal">
+        <div class="system-icon">🚀</div>
+        <h3>Launch Accelerator - 1 Year</h3>
+        <p>Full DFY funnel, website, email, lead magnet, automations + course builder. Your entire online presence built and running.</p>
+      </div>
+
+      <div class="system-card reveal">
+        <div class="system-icon">🎬</div>
+        <h3>Automated Course &amp; Funnel</h3>
+        <p>We film, edit, host and build your low-ticket course - branded as you. A complete product you can sell on day one.</p>
+      </div>
+
+      <div class="system-card reveal">
+        <div class="system-icon">🤖</div>
+        <h3>AI Custom Builds (x3)</h3>
+        <p>Lead, Offer &amp; Sales AI tools built around your business, in your ChatGPT. Done-for-you AI that works the way you do.</p>
+      </div>
+
+      <div class="system-card reveal">
+        <div class="system-icon">📣</div>
+        <h3>Launch Marketing Accelerator</h3>
+        <p>90-day DFY JV marketing with 10 guaranteed podcast placements. Traffic and authority built simultaneously.</p>
+      </div>
+
+      <div class="system-card reveal">
+        <div class="system-icon">📰</div>
+        <h3>Media On Demand</h3>
+        <p>60-day DFY press campaign, 15-placement guarantee, 1M+ reach. The credibility layer that makes everything else convert.</p>
+      </div>
+
+      <div class="system-card reveal">
+        <div class="system-icon">🔍</div>
+        <h3>AI SEO</h3>
+        <p>Done-for-you visibility inside ChatGPT, Gemini, Perplexity &amp; Google AI. Be found everywhere your clients are searching.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- VALUE STACK -->
+<section class="value-stack">
+  <div class="container">
+    <span class="section-label">What It's Worth</span>
+    <h2>Add up the value of<br>each system - <span class="gold">separately</span>.</h2>
+    <p class="value-intro">Each system is sold on its own. Bought separately - or built the old way with agencies and freelancers - the value clears fifty-five thousand dollars before AI SEO is even counted.</p>
+
+    <table class="value-table reveal">
+      <thead>
+        <tr>
+          <th>System</th>
+          <th style="text-align:right">Real-World Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Launch Accelerator - DFY build (1 year)</td>
+          <td>$15,000+</td>
+        </tr>
+        <tr>
+          <td>Automated Course &amp; Funnel</td>
+          <td>$997</td>
+        </tr>
+        <tr>
+          <td>AI Custom Builds (x3)</td>
+          <td>$947</td>
+        </tr>
+        <tr>
+          <td>Launch Marketing Accelerator</td>
+          <td>$15,000+</td>
+        </tr>
+        <tr>
+          <td>Media On Demand</td>
+          <td>$24,500+</td>
+        </tr>
+        <tr>
+          <td>AI SEO (done-for-you)</td>
+          <td>Included</td>
+        </tr>
+        <tr class="value-total-row">
+          <td>Total Real-World Value</td>
+          <td>$55,000+</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- COMPARISON -->
+<section class="comparison">
+  <div class="container">
+    <span class="section-label">The Comparison</span>
+    <h2>Five vendors and $55K+ -<br>or <span class="gold">one engine</span>, one decision.</h2>
+
+    <div class="comp-grid">
+      <div class="comp-card bad reveal">
+        <div class="comp-badge">Piece By Piece</div>
+        <h3>The Old Way</h3>
+        <ul class="comp-list">
+          <li><span class="icon">✗</span> Multiple separate purchases</li>
+          <li><span class="icon">✗</span> Pieces that don't talk to each other</li>
+          <li><span class="icon">✗</span> Months of stop-start progress</li>
+          <li><span class="icon">✗</span> Five vendors, five invoices, five points of failure</li>
+        </ul>
+        <div class="comp-price">
+          $55,000+
+          <div class="comp-price-note">paid across multiple vendors</div>
+        </div>
+      </div>
+
+      <div class="comp-card good reveal">
+        <div class="comp-badge">The All-In-One Engine</div>
+        <h3>The <span class="gold">Smart Way</span></h3>
+        <ul class="comp-list">
+          <li><span class="icon">✓</span> One bundle, one decision</li>
+          <li><span class="icon">✓</span> Every system built to work together</li>
+          <li><span class="icon">✓</span> Done-for-you across the board</li>
+          <li><span class="icon">✓</span> One investment, far below the parts</li>
+        </ul>
+        <div class="comp-price">
+          $5,000
+          <div class="comp-price-note">one complete investment</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="container">
+    <div class="stats-grid">
+      <div>
+        <div class="stat-number">6</div>
+        <div class="stat-label">Done-for-you systems working as one</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div>
+        <div class="stat-number">$55K+</div>
+        <div class="stat-label">Real-world value of the components</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div>
+        <div class="stat-number">1</div>
+        <div class="stat-label">Decision instead of five separate ones</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- OFFER -->
+<section class="offer" id="offer">
+  <div class="container">
+    <span class="section-label">The Bundle Offer</span>
+    <h2>The entire engine -<br>for <span class="gold">one bundle investment</span>.</h2>
+
+    <div class="offer-card reveal">
+      <div class="offer-badge">All-In-One Engine</div>
+      <h2>Everything Done For You</h2>
+
+      <ul class="offer-includes">
+        <li>Launch Accelerator (1 year) + Automated Course &amp; Funnel</li>
+        <li>AI Custom Builds (x3) + Launch Marketing Accelerator</li>
+        <li>Media On Demand + AI SEO</li>
+        <li>$55,000+ of value, assembled into one done-for-you engine</li>
+      </ul>
+
+      <div class="price-block">
+        <div class="price-value-line">$55,000+ real-world value</div>
+        <div class="price-main">$5,000</div>
+        <div class="price-sub">one-time bundle investment &nbsp;&bull;&nbsp; payment plan available</div>
+      </div>
+
+      <a href="#" class="btn-primary">Build My Engine</a>
+      <div class="offer-footnote">Payment plan available on request</div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <div class="container">
+    <div class="gold-line"></div>
+    <h2>One engine. One decision.<br>Everything <span class="gold">done for you</span>.</h2>
+    <p>Every month spent buying and stitching pieces is a month the engine isn't running. The bundle gets every layer live together - so leads, authority, product and AI leverage compound from day one.</p>
+    <a href="#offer" class="btn-primary">Get the Full Engine</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    &copy; Coach Foundation &nbsp;&bull;&nbsp; coachfoundation.com
+  </div>
+</footer>
+
+<!-- SCROLL REVEAL -->
+<script>
+(function() {
+  var els = document.querySelectorAll('.reveal');
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(function(el) { io.observe(el); });
+})();
+</script>
+</body>
+</html>
