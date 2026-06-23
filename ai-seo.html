@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI SEO | Coach Foundation</title>
+<style>
+  :root {
+    --cyan: #00C2FF;
+    --cyan-light: #7DE8FF;
+    --cyan-dim: rgba(0,194,255,0.10);
+    --purple: #7B5EA7;
+    --bg: #060B14;
+    --bg2: #0A1120;
+    --bg3: #0E1729;
+    --text: #EEF2F8;
+    --text-muted: #8899B4;
+    --border: rgba(0,194,255,0.15);
+    --radius: 14px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3 { line-height: 1.15; font-weight: 700; letter-spacing: -0.02em; }
+  h1 { font-size: clamp(2rem, 5vw, 3.75rem); }
+  h2 { font-size: clamp(1.6rem, 3.5vw, 2.75rem); }
+  h3 { font-size: clamp(1rem, 2vw, 1.2rem); font-weight: 600; }
+
+  .cyan { color: var(--cyan); }
+
+  .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+  section { padding: 96px 0; }
+
+  /* ── TOPBAR ── */
+  .topbar {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+    position: sticky; top: 0; z-index: 100;
+    backdrop-filter: blur(12px);
+  }
+  .topbar .container { display: flex; align-items: center; gap: 10px; }
+  .logo-mark {
+    width: 36px; height: 36px;
+    background: var(--cyan);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900; font-size: 14px; color: #060B14;
+  }
+  .logo-text {
+    font-size: 13px; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 112px 0 96px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -40%; left: 50%;
+    transform: translateX(-50%);
+    width: 800px; height: 600px;
+    background: radial-gradient(ellipse, rgba(0,194,255,0.12) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -20%; left: 30%;
+    width: 400px; height: 400px;
+    background: radial-gradient(ellipse, rgba(123,94,167,0.08) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--cyan-dim);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 6px 18px;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--cyan-light);
+    margin-bottom: 32px;
+  }
+  .hero-eyebrow .dot {
+    width: 6px; height: 6px;
+    background: var(--cyan);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.75); }
+  }
+
+  .hero h1 { margin-bottom: 28px; }
+  .hero-sub {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: var(--text-muted);
+    max-width: 660px; margin: 0 auto 52px;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    background: var(--cyan);
+    color: #060B14;
+    font-size: 1rem; font-weight: 700;
+    padding: 16px 40px;
+    border-radius: 100px;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: transform 0.15s, box-shadow 0.15s;
+    border: none; cursor: pointer;
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(0,194,255,0.28);
+  }
+
+  .btn-note { font-size: 12px; color: var(--text-muted); margin-top: 14px; display: block; }
+
+  /* ── SECTION LABELS ── */
+  .section-label {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--cyan); margin-bottom: 14px;
+    display: block;
+  }
+
+  /* ── SEARCH CHANGED ── */
+  .changed { background: var(--bg2); }
+
+  .platforms-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 52px;
+  }
+
+  .platform-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px 24px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .platform-card:hover { transform: translateY(-4px); border-color: var(--cyan); }
+  .platform-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--cyan), transparent);
+  }
+
+  .platform-icon {
+    width: 44px; height: 44px;
+    background: var(--cyan-dim);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    margin-bottom: 16px;
+  }
+
+  .platform-card h3 { margin-bottom: 10px; font-size: 1rem; }
+  .platform-card p { font-size: 0.875rem; color: var(--text-muted); line-height: 1.6; }
+
+  .changed-callout {
+    margin-top: 40px;
+    background: var(--cyan-dim);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px 28px;
+    font-size: 1rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+  .changed-callout strong { color: var(--text); }
+
+  /* ── RISK ── */
+  .risk { background: var(--bg); }
+
+  .risk-box {
+    margin-top: 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: center;
+  }
+
+  .risk-text h3 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: var(--text);
+  }
+  .risk-text p { font-size: 1rem; color: var(--text-muted); line-height: 1.75; }
+
+  .risk-visual {
+    background: var(--bg3);
+    border: 1px solid rgba(217,91,91,0.2);
+    border-radius: var(--radius);
+    padding: 32px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .risk-visual::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(217,91,91,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .risk-item {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 0.9rem;
+  }
+  .risk-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .risk-item .x { color: #D95B5B; font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+  .risk-item span { color: var(--text-muted); }
+
+  /* ── WHAT WE DO ── */
+  .services { background: var(--bg2); }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 52px;
+  }
+
+  .service-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px 24px;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .service-card:hover { transform: translateY(-4px); border-color: var(--cyan); }
+
+  .service-num {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--cyan);
+    margin-bottom: 12px;
+    display: block;
+  }
+  .service-card h3 { margin-bottom: 10px; font-size: 1rem; }
+  .service-card p { font-size: 0.875rem; color: var(--text-muted); line-height: 1.6; }
+
+  /* ── WHAT YOU GET ── */
+  .outcomes { background: var(--bg); }
+
+  .outcomes-list {
+    display: flex; flex-direction: column;
+    gap: 20px;
+    margin-top: 52px;
+    max-width: 680px;
+  }
+
+  .outcome-item {
+    display: flex; align-items: flex-start; gap: 20px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px 28px;
+    transition: border-color 0.2s;
+  }
+  .outcome-item:hover { border-color: var(--cyan); }
+
+  .outcome-check {
+    width: 32px; height: 32px;
+    background: var(--cyan-dim);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--cyan);
+    font-size: 14px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .outcome-item p { font-size: 1rem; color: var(--text); line-height: 1.5; }
+
+  /* ── CTA ── */
+  .cta-section {
+    background: var(--bg2);
+    text-align: center;
+    padding: 112px 0;
+    position: relative;
+    overflow: hidden;
+    border-top: 1px solid var(--border);
+  }
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    bottom: -30%; left: 50%;
+    transform: translateX(-50%);
+    width: 700px; height: 500px;
+    background: radial-gradient(ellipse, rgba(0,194,255,0.10) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .cta-section h2 { margin-bottom: 20px; }
+  .cta-section p {
+    font-size: 1.1rem; color: var(--text-muted);
+    max-width: 520px; margin: 0 auto 48px;
+  }
+
+  /* ── URGENCY BANNER ── */
+  .urgency-bar {
+    background: linear-gradient(135deg, #0A1F3C, #0D2545);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 48px 0;
+    text-align: center;
+  }
+  .urgency-bar p {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    max-width: 640px; margin: 0 auto;
+    line-height: 1.7;
+  }
+  .urgency-bar p strong { color: var(--text); }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 0;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  /* ── REVEAL ── */
+  .reveal {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    section { padding: 72px 0; }
+    .platforms-grid { grid-template-columns: 1fr; }
+    .services-grid { grid-template-columns: 1fr 1fr; }
+    .risk-box { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 480px) {
+    .services-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<nav class="topbar">
+  <div class="container">
+    <div class="logo-mark">CF</div>
+    <span class="logo-text">Coach Foundation</span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-eyebrow"><span class="dot"></span>Done-For-You AI Search Optimization</div>
+    <h1><span class="cyan">AI SEO</span><br>Get found inside<br>the AI answers.</h1>
+    <p class="hero-sub">Your prospects now ask ChatGPT, Gemini, Perplexity and Google's AI before they ever reach a search page. AI SEO makes sure that when they ask, your business is the answer.</p>
+    <a href="https://buy.stripe.com/7sY3cv57x8VaaTf16Q6oo17" class="btn-primary" target="_blank" rel="noopener">Ask About AI SEO Availability</a>
+    <span class="btn-note">Own the AI answers before your competitors do</span>
+  </div>
+</section>
+
+<!-- SEARCH CHANGED -->
+<section class="changed">
+  <div class="container">
+    <span class="section-label">Search Just Changed</span>
+    <h2>Your prospects are asking AI,<br>not <span class="cyan">scrolling Google</span>.</h2>
+
+    <div class="platforms-grid">
+      <div class="platform-card reveal">
+        <div class="platform-icon">🤖</div>
+        <h3>ChatGPT</h3>
+        <p>Buyers ask it for recommendations and get one direct answer. Not ten links - one name.</p>
+      </div>
+      <div class="platform-card reveal">
+        <div class="platform-icon">✨</div>
+        <h3>Gemini &amp; Perplexity</h3>
+        <p>AI assistants summarize the web and name a short list of experts. If you're not on that list, you don't exist.</p>
+      </div>
+      <div class="platform-card reveal">
+        <div class="platform-icon">🔍</div>
+        <h3>Google AI Overviews</h3>
+        <p>AI answers now sit above the traditional results page - capturing attention before anyone scrolls.</p>
+      </div>
+    </div>
+
+    <div class="changed-callout reveal">
+      <strong>A large share of searches now end inside an AI answer - no clicks, no scrolling.</strong> If your business isn't part of that answer, the prospect never knows you exist.
+    </div>
+  </div>
+</section>
+
+<!-- THE RISK -->
+<section class="risk">
+  <div class="container">
+    <span class="section-label">The Risk</span>
+    <h2>If the AI doesn't know you,<br>you're <span class="cyan">invisible</span> - overnight.</h2>
+
+    <div class="risk-box">
+      <div class="risk-text reveal">
+        <p>Old-school SEO chased keywords and backlinks. AI search works differently: it recognizes trusted entities - who you are, what you do, and whether you're credible across the whole web.</p>
+        <br>
+        <p>Coaches optimized only for classic Google are quietly disappearing from the answers buyers actually see. Not because they got worse - because AI never learned they exist.</p>
+      </div>
+      <div class="risk-visual reveal">
+        <div class="risk-item">
+          <span class="x">✗</span>
+          <span>Keyword rankings don't translate to AI answers</span>
+        </div>
+        <div class="risk-item">
+          <span class="x">✗</span>
+          <span>Classic backlinks carry less weight in AI search</span>
+        </div>
+        <div class="risk-item">
+          <span class="x">✗</span>
+          <span>AI ignores coaches with a thin web footprint</span>
+        </div>
+        <div class="risk-item">
+          <span class="x">✗</span>
+          <span>Competitors building AI authority now become the default answer - permanently</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE DO -->
+<section class="services">
+  <div class="container">
+    <span class="section-label">What We Do - Done For You</span>
+    <h2>We make your business<br><span class="cyan">recognizable to the AI</span>.</h2>
+
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <span class="service-num">01</span>
+        <h3>Entity Authority</h3>
+        <p>We build the signals that tell AI models who you are and why you're credible - across every major platform it reads.</p>
+      </div>
+      <div class="service-card reveal">
+        <span class="service-num">02</span>
+        <h3>Structured Content</h3>
+        <p>Content engineered to be quoted and cited by AI answer engines - not just ranked in traditional search.</p>
+      </div>
+      <div class="service-card reveal">
+        <span class="service-num">03</span>
+        <h3>Multi-Platform Footprint</h3>
+        <p>Authority across the places AI checks - not just your website. We build the full ecosystem it needs to trust you.</p>
+      </div>
+      <div class="service-card reveal">
+        <span class="service-num">04</span>
+        <h3>Schema &amp; Technical</h3>
+        <p>The technical markup that makes your content machine-readable and unambiguous to AI crawlers.</p>
+      </div>
+      <div class="service-card reveal">
+        <span class="service-num">05</span>
+        <h3>Topical Authority</h3>
+        <p>Become the recognized expert for the questions your buyers ask - so the AI recommends you by name.</p>
+      </div>
+      <div class="service-card reveal">
+        <span class="service-num">06</span>
+        <h3>Ongoing Optimization</h3>
+        <p>We keep adapting as AI search evolves so you stay in the answers - not just for today's algorithms.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT YOU GET -->
+<section class="outcomes">
+  <div class="container">
+    <span class="section-label">What You Get</span>
+    <h2>Visibility where the next<br>decade of search is <span class="cyan">happening</span>.</h2>
+
+    <div class="outcomes-list">
+      <div class="outcome-item reveal">
+        <div class="outcome-check">✓</div>
+        <p>Your business surfaced inside AI-generated answers - where your buyers are already looking</p>
+      </div>
+      <div class="outcome-item reveal">
+        <div class="outcome-check">✓</div>
+        <p>Recognized as a trusted authority in your niche by ChatGPT, Gemini, Perplexity and Google AI</p>
+      </div>
+      <div class="outcome-item reveal">
+        <div class="outcome-check">✓</div>
+        <p>A durable footprint that compounds as AI search grows - built once, pays off for years</p>
+      </div>
+      <div class="outcome-item reveal">
+        <div class="outcome-check">✓</div>
+        <p>A done-for-you process - no SEO learning curve for you, no technical work on your end</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- URGENCY BANNER -->
+<div class="urgency-bar">
+  <div class="container">
+    <p><strong>AI search rewards whoever builds authority first.</strong> The coaches who get recognized now will be the default answer for years. Every month you wait, a competitor gets there ahead of you.</p>
+  </div>
+</div>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <span class="section-label">Next Step</span>
+    <h2>Own the AI answers<br>before your <span class="cyan">competitors do</span>.</h2>
+    <p>Ask about current availability and onboarding for AI SEO. Spots are limited to ensure quality across every client we take on.</p>
+    <a href="https://buy.stripe.com/7sY3cv57x8VaaTf16Q6oo17" class="btn-primary" target="_blank" rel="noopener">Ask About AI SEO Availability</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    &copy; Coach Foundation &nbsp;&bull;&nbsp; coachfoundation.com
+  </div>
+</footer>
+
+<script>
+(function() {
+  var els = document.querySelectorAll('.reveal');
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(function(el) { io.observe(el); });
+})();
+</script>
+</body>
+</html>
