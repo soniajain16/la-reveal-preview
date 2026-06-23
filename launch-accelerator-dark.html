@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coach Foundation — Take Your System Live</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E4C97A;
+    --gold-dim: rgba(201,168,76,0.10);
+    --bg: #08080E;
+    --bg2: #0F0F1A;
+    --bg3: #14141F;
+    --text: #F0EDE6;
+    --text-muted: #9A9587;
+    --border: rgba(201,168,76,0.18);
+    --radius: 14px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .gold { color: var(--gold); }
+
+  /* REVEAL ANIMATION */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* PULSE ANIMATION */
+  @keyframes pulse {
+    0%   { transform: scale(1);   opacity: 1; }
+    50%  { transform: scale(1.4); opacity: 0.5; }
+    100% { transform: scale(1);   opacity: 1; }
+  }
+
+  /* ===== TOPBAR ===== */
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 24px;
+  }
+  .topbar-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .logo-mark {
+    width: 38px;
+    height: 38px;
+    background: var(--gold);
+    color: #08080E;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+  .logo-text {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 17px;
+    color: var(--text);
+    letter-spacing: -0.01em;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: var(--bg);
+    background-image: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(201,168,76,0.12) 0%, transparent 70%);
+    padding: 96px 24px 88px;
+    text-align: center;
+  }
+  .eyebrow-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--gold-dim);
+    border: 1px solid var(--gold);
+    border-radius: 100px;
+    padding: 6px 16px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+  }
+  .eyebrow-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--gold);
+    animation: pulse 1.8s infinite;
+    flex-shrink: 0;
+  }
+  .hero h1 {
+    font-size: clamp(36px, 6vw, 62px);
+    font-weight: 800;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    max-width: 820px;
+    margin: 0 auto 24px;
+  }
+  .hero-sub {
+    font-size: clamp(16px, 2vw, 18px);
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto 40px;
+    line-height: 1.7;
+  }
+  .btn-gold {
+    display: inline-block;
+    background: var(--gold);
+    color: #08080E;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 14px 32px;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: none;
+    cursor: pointer;
+    letter-spacing: -0.01em;
+  }
+  .btn-gold:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(201,168,76,0.35);
+  }
+  .btn-note {
+    display: block;
+    margin-top: 14px;
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  /* ===== SECTION BASE ===== */
+  section {
+    padding: 80px 24px;
+  }
+  .section-label {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: block;
+  }
+  .section-h2 {
+    font-size: clamp(28px, 4.5vw, 46px);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 32px;
+  }
+
+  /* ===== SECTION 2 ===== */
+  .s2 { background: var(--bg2); }
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: start;
+  }
+  .two-col p {
+    color: var(--text-muted);
+    font-size: 16px;
+    line-height: 1.75;
+  }
+  .checklist {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 15px;
+    color: var(--text);
+    line-height: 1.5;
+  }
+  .check-icon {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--gold-dim);
+    border: 1px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--gold);
+    font-size: 12px;
+    font-weight: 700;
+    margin-top: 1px;
+  }
+
+  /* ===== SECTION 3 ===== */
+  .s3 { background: var(--bg); }
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 16px;
+  }
+  .card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 32px 28px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.25s ease, border-color 0.25s ease;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    border-radius: var(--radius) var(--radius) 0 0;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    border-color: var(--gold);
+  }
+  .card-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: var(--gold-dim);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+  .card-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+    margin-bottom: 10px;
+    color: var(--text);
+  }
+  .card-desc {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.65;
+  }
+
+  /* ===== SECTION 4 ===== */
+  .s4 { background: var(--bg2); }
+  .progress-steps {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-top: 16px;
+    position: relative;
+  }
+  .step-wrapper {
+    display: flex;
+    align-items: center;
+    flex: 1;
+  }
+  .step-wrapper:last-child { flex: none; }
+  .step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+  .step-circle {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .step.done .step-circle {
+    background: var(--gold-dim);
+    border: 1px solid var(--border);
+    color: var(--gold);
+  }
+  .step.active .step-circle {
+    background: var(--gold);
+    color: #08080E;
+    box-shadow: 0 0 0 6px rgba(201,168,76,0.15);
+  }
+  .step-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+  .step.active .step-label {
+    color: var(--gold);
+    font-size: 14px;
+  }
+  .step-line {
+    flex: 1;
+    height: 2px;
+    background: var(--border);
+    margin: 0 4px;
+    margin-bottom: 24px;
+  }
+
+  /* ===== SECTION 5 ===== */
+  .s5 { background: var(--bg); }
+  .s5-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: start;
+  }
+  .s5-copy {
+    color: var(--text-muted);
+    font-size: 16px;
+    line-height: 1.75;
+    margin-bottom: 28px;
+  }
+  .pricing-card {
+    background: var(--bg3);
+    border: 1px solid var(--gold);
+    border-radius: var(--radius);
+    padding: 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .pricing-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+  }
+  .badge {
+    display: inline-block;
+    background: var(--gold);
+    color: #08080E;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    border-radius: 100px;
+    margin-bottom: 24px;
+  }
+  .price-big {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 56px;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 8px;
+    letter-spacing: -0.03em;
+  }
+  .price-sub {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-bottom: 28px;
+  }
+  .price-footnote {
+    margin-top: 16px;
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  /* ===== STATS BAR ===== */
+  .stats-bar {
+    background: #C9A84C;
+    padding: 40px 24px;
+  }
+  .stats-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+  }
+  .stat-item {
+    flex: 1;
+    text-align: center;
+    padding: 0 24px;
+  }
+  .stat-item + .stat-item {
+    border-left: 1px solid rgba(8,8,14,0.18);
+  }
+  .stat-number {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: clamp(24px, 3.5vw, 36px);
+    color: #08080E;
+    display: block;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+  .stat-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(8,8,14,0.65);
+    margin-top: 4px;
+    display: block;
+  }
+
+  /* ===== SECTION 6 ===== */
+  .s6 { background: var(--bg2); }
+  .callout-box {
+    background: var(--gold-dim);
+    border: 1px solid var(--gold);
+    border-radius: var(--radius);
+    padding: 32px;
+    font-size: 17px;
+    color: var(--text);
+    line-height: 1.75;
+    margin-top: 8px;
+  }
+
+  /* ===== SECTION 7 ===== */
+  .s7 { background: var(--bg); }
+  .plan-card-wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: 16px;
+  }
+  .plan-card {
+    background: var(--bg3);
+    border: 1px solid var(--gold);
+    border-radius: var(--radius);
+    padding: 48px;
+    max-width: 520px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .plan-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+  }
+  .price-huge {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 64px;
+    color: var(--gold);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    margin-bottom: 4px;
+  }
+  .price-per {
+    color: var(--text-muted);
+    font-size: 16px;
+    margin-bottom: 4px;
+  }
+  .plan-desc {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-bottom: 28px;
+    line-height: 1.6;
+  }
+  .plan-checklist {
+    list-style: none;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 32px;
+  }
+  .plan-checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 15px;
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  /* ===== FINAL CTA ===== */
+  .final-cta {
+    background: var(--bg);
+    background-image: radial-gradient(ellipse 70% 50% at 50% 100%, rgba(201,168,76,0.11) 0%, transparent 65%);
+    padding: 96px 24px 88px;
+    text-align: center;
+  }
+  .final-cta h2 {
+    font-size: clamp(30px, 5vw, 52px);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 36px;
+  }
+  .final-checklist {
+    list-style: none;
+    display: inline-flex;
+    flex-direction: column;
+    gap: 14px;
+    text-align: left;
+    margin-bottom: 40px;
+  }
+  .final-checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 16px;
+    color: var(--text);
+    line-height: 1.5;
+  }
+  .cta-sub {
+    display: block;
+    margin-top: 16px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+    padding: 28px 24px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .two-col,
+    .s5-layout {
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+    .cards-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    .progress-steps {
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+    .step-wrapper {
+      flex-direction: column;
+      align-items: center;
+      flex: none;
+      width: 100%;
+    }
+    .step-line {
+      width: 2px;
+      height: 32px;
+      margin: 4px 0;
+      margin-bottom: 4px;
+    }
+    .stats-inner {
+      flex-direction: column;
+      gap: 28px;
+    }
+    .stat-item + .stat-item {
+      border-left: none;
+      border-top: 1px solid rgba(8,8,14,0.18);
+      padding-top: 24px;
+      width: 100%;
+    }
+    .plan-card {
+      padding: 36px 24px;
+    }
+    .pricing-card {
+      padding: 32px 24px;
+    }
+    .price-big {
+      font-size: 44px;
+    }
+    .price-huge {
+      font-size: 52px;
+    }
+    .final-cta {
+      padding: 72px 24px 64px;
+    }
+    section {
+      padding: 64px 24px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="logo-mark">CF</div>
+    <span class="logo-text">Coach Foundation</span>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="eyebrow-badge reveal">
+    <span class="eyebrow-dot"></span>
+    TAKE IT LIVE — LAUNCH TO REAL LEADS
+  </div>
+  <h1 class="reveal">Your launch system is built. Now let's <span style="color:var(--gold)">switch it on.</span></h1>
+  <p class="hero-sub reveal">Your funnel, website, email, lead magnet, automations and course builder are designed, branded and ready. Going live takes one simple step — your plan at just $376 for the year.</p>
+  <a href="https://buy.stripe.com/7sY3cv57x8VaaTf16Q6oo17" target="_blank" rel="noopener" class="btn-gold reveal">Take My System Live</a>
+  <span class="btn-note reveal">$376 for the year &middot; or $47/month</span>
+</section>
+
+<!-- SECTION 2 -->
+<section class="s2">
+  <div class="container">
+    <span class="section-label reveal">THE ONE STEP LEFT</span>
+    <h2 class="section-h2 reveal">A system that's built but not live <span class="gold">earns you nothing.</span></h2>
+    <div class="two-col">
+      <div class="reveal">
+        <p>Everything's ready — your funnel, your site, your emails, your automations, all branded as you. But a finished build sitting offline brings in no traffic, no leads and no clients. Going live is the one step between everything we've built and real results. The moment it's switched on, the whole engine starts working for you.</p>
+      </div>
+      <div class="reveal">
+        <ul class="checklist">
+          <li>
+            <span class="check-icon">&#10003;</span>
+            Your funnel online and taking real traffic
+          </li>
+          <li>
+            <span class="check-icon">&#10003;</span>
+            Your website working as your 24/7 authority
+          </li>
+          <li>
+            <span class="check-icon">&#10003;</span>
+            Email following up and booking calls automatically
+          </li>
+          <li>
+            <span class="check-icon">&#10003;</span>
+            Your lead magnet drawing the right people in
+          </li>
+          <li>
+            <span class="check-icon">&#10003;</span>
+            Automations running the whole engine for you
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3 -->
+<section class="s3">
+  <div class="container">
+    <span class="section-label reveal">WHAT'S ALREADY BUILT</span>
+    <h2 class="section-h2 reveal">Your complete system — built, branded, and <span class="gold">ready to go live.</span></h2>
+    <div class="cards-grid">
+      <div class="card reveal">
+        <div class="card-icon">&#128640;</div>
+        <div class="card-title">Conversion Funnel</div>
+        <p class="card-desc">A high-converting funnel designed to turn visitors into booked calls and paying clients.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon">&#127760;</div>
+        <div class="card-title">Website</div>
+        <p class="card-desc">Your professional site, branded and built to establish authority and capture leads around the clock.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon">&#128231;</div>
+        <div class="card-title">Email Campaign</div>
+        <p class="card-desc">A full email sequence that nurtures leads, builds trust and moves them toward working with you.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon">&#127919;</div>
+        <div class="card-title">Lead Magnet</div>
+        <p class="card-desc">A compelling free offer that attracts your ideal client and starts the relationship on the right foot.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon">&#9881;</div>
+        <div class="card-title">Automations</div>
+        <p class="card-desc">Smart workflows that handle follow-up, reminders and onboarding — so nothing falls through the cracks.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon">&#127916;</div>
+        <div class="card-title">Course Builder</div>
+        <p class="card-desc">A ready-to-use platform to deliver your programmes, modules and content in a polished experience.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4 -->
+<section class="s4">
+  <div class="container">
+    <span class="section-label reveal">WHERE YOU ARE NOW</span>
+    <h2 class="section-h2 reveal">You're one step <span class="gold">away from live.</span></h2>
+    <div class="progress-steps reveal">
+      <div class="step-wrapper">
+        <div class="step done">
+          <div class="step-circle">&#10003;</div>
+          <span class="step-label">Started</span>
+        </div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-wrapper">
+        <div class="step done">
+          <div class="step-circle">&#10003;</div>
+          <span class="step-label">Built</span>
+        </div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-wrapper">
+        <div class="step done">
+          <div class="step-circle">&#10003;</div>
+          <span class="step-label">Edited</span>
+        </div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-wrapper">
+        <div class="step active">
+          <div class="step-circle">&#8594;</div>
+          <span class="step-label">Go live now</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 5 -->
+<section class="s5">
+  <div class="container">
+    <span class="section-label reveal">GOING LIVE</span>
+    <h2 class="section-h2 reveal">Your system goes live the moment <span class="gold">you start your plan.</span></h2>
+    <div class="s5-layout">
+      <div>
+        <p class="s5-copy reveal">Your build is done — your complete front-end and back-end system, with two rounds of edits to get it just right. Going live takes just $376 for the year — we get your system online and keep it running, so you can start launching to real leads. You keep full control and can make your own edits any time.</p>
+        <ul class="checklist reveal">
+          <li>
+            <span class="check-icon">&#10003;</span>
+            System switched on and live from day one
+          </li>
+          <li>
+            <span class="check-icon">&#10003;</span>
+            Full front-end and back-end build included
+          </li>
+          <li>
+            <span class="check-icon">&#10003;</span>
+            Two rounds of edits already completed
+          </li>
+          <li>
+            <span class="check-icon">&#10003;</span>
+            You stay in control and can edit any time
+          </li>
+        </ul>
+      </div>
+      <div class="reveal">
+        <div class="pricing-card">
+          <span class="badge">BEST VALUE — YEARLY</span>
+          <div class="price-big">$376</div>
+          <div class="price-sub">for the full year — 4 months free</div>
+          <a href="https://buy.stripe.com/7sY3cv57x8VaaTf16Q6oo17" target="_blank" rel="noopener" class="btn-gold">Go live for the year</a>
+          <p class="price-footnote">Pay for 8 months, get all 12. Also available at $47/month.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item reveal">
+      <span class="stat-number">$15K&ndash;20K</span>
+      <span class="stat-label">What a build like this normally costs</span>
+    </div>
+    <div class="stat-item reveal">
+      <span class="stat-number">6 Weeks</span>
+      <span class="stat-label">Of freelancer-wrangling you skipped</span>
+    </div>
+    <div class="stat-item reveal">
+      <span class="stat-number">$376</span>
+      <span class="stat-label">Keeps everything live for a full year</span>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 6 -->
+<section class="s6">
+  <div class="container">
+    <span class="section-label reveal">WHAT THIS IS REALLY WORTH</span>
+    <h2 class="section-h2 reveal">A $15,000&ndash;$20,000 build — live and running for <span class="gold">$376 a year.</span></h2>
+    <div class="callout-box reveal">
+      You already have the finished asset — a complete, professionally built business engine, designed and branded as you. For just $376 a year we take it live and keep it running, so all that work actually starts bringing in leads.
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 7 -->
+<section class="s7">
+  <div class="container">
+    <span class="section-label reveal">THE BEST WAY TO GO LIVE</span>
+    <h2 class="section-h2 reveal" style="text-align:center;">Go live for a full year — pay for 8 months, <span class="gold">get 12.</span></h2>
+    <div class="plan-card-wrap">
+      <div class="plan-card reveal">
+        <span class="badge">YEARLY — BEST VALUE</span>
+        <div class="price-huge">$376</div>
+        <div class="price-per">/year</div>
+        <p class="plan-desc">Pay for 8 months &rarr; get all 12. Four months free. That's $188 saved versus paying month to month.</p>
+        <ul class="plan-checklist">
+          <li>
+            <span class="check-icon">&#10003;</span>
+            Complete system live and running
+          </li>
+          <li>
+            <span class="check-icon">&#10003;</span>
+            All 6 tools online from day one
+          </li>
+          <li>
+            <span class="check-icon">&#10003;</span>
+            Four months free versus monthly
+          </li>
+          <li>
+            <span class="check-icon">&#10003;</span>
+            Full control — edit any time
+          </li>
+        </ul>
+        <a href="https://buy.stripe.com/7sY3cv57x8VaaTf16Q6oo17" target="_blank" rel="noopener" class="btn-gold">Go live for the year</a>
+        <p class="price-footnote">$47/month also available.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <h2 class="reveal">Switch on your system.<br><span class="gold">$376 for the year.</span></h2>
+  <ul class="final-checklist reveal">
+    <li>
+      <span class="check-icon">&#10003;</span>
+      Everything live from day one
+    </li>
+    <li>
+      <span class="check-icon">&#10003;</span>
+      All 6 tools running for you
+    </li>
+    <li>
+      <span class="check-icon">&#10003;</span>
+      Four months free on the yearly plan
+    </li>
+    <li>
+      <span class="check-icon">&#10003;</span>
+      Full control, edit any time
+    </li>
+  </ul>
+  <a href="https://buy.stripe.com/7sY3cv57x8VaaTf16Q6oo17" target="_blank" rel="noopener" class="btn-gold reveal">Take My System Live</a>
+  <span class="cta-sub reveal">GO LIVE TODAY &middot; $376 for the year &middot; or $47/month</span>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2025 Coach Foundation. All rights reserved.</p>
+</footer>
+
+<script>
+  // Scroll reveal via IntersectionObserver
+  const revealEls = document.querySelectorAll('.reveal');
+
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  revealEls.forEach(function(el) {
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
