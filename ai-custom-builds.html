@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Three Custom AI Tools, Built Around Your Business | Coach Foundation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0e1b33;
+    --navy2: #15264a;
+    --accent: #f5972b;
+    --accent-d: #e07d10;
+    --muted: #5b6577;
+    --bg: #f6f8fb;
+    --card: #ffffff;
+    --line: #e7ecf3;
+    --radius: 16px;
+    --shadow: 0 18px 40px -22px rgba(14,27,51,.35);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    color: #1c2333;
+    background: var(--bg);
+    font-size: 16px;
+    line-height: 1.65;
+  }
+
+  h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; line-height: 1.2; }
+
+  a { text-decoration: none; }
+
+  /* TOPBAR */
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #fff;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 32px;
+    height: 64px;
+  }
+
+  .logo-mark {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--navy);
+  }
+
+  .logo-badge {
+    background: var(--navy);
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    padding: 5px 10px;
+    border-radius: 8px;
+    letter-spacing: 0.02em;
+  }
+
+  .topbar-cta {
+    background: var(--accent);
+    color: #1a1205;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 10px 22px;
+    border-radius: 999px;
+    transition: background 0.18s;
+    white-space: nowrap;
+  }
+  .topbar-cta:hover { background: var(--accent-d); }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(160deg, #0e1b33, #15264a);
+    color: #fff;
+    padding: 90px 24px 100px;
+    text-align: center;
+  }
+
+  .eyebrow-badge {
+    display: inline-block;
+    background: var(--accent);
+    color: #1a1205;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 999px;
+    margin-bottom: 28px;
+  }
+
+  .hero h1 {
+    font-size: clamp(2rem, 5vw, 3.25rem);
+    font-weight: 800;
+    color: #fff;
+    max-width: 720px;
+    margin: 0 auto 22px;
+  }
+
+  .hero-sub {
+    font-size: clamp(1rem, 2.2vw, 1.2rem);
+    color: rgba(255,255,255,0.82);
+    max-width: 620px;
+    margin: 0 auto 38px;
+    font-weight: 400;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    background: var(--accent);
+    color: #1a1205;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+    padding: 17px 40px;
+    border-radius: 999px;
+    transition: background 0.18s, transform 0.15s;
+  }
+  .btn-primary:hover { background: var(--accent-d); transform: translateY(-2px); }
+
+  .hero-note {
+    margin-top: 18px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.55);
+    font-style: italic;
+  }
+
+  /* SECTIONS */
+  section { padding: 80px 24px; }
+  section.white { background: #fff; }
+  section.grey { background: var(--bg); }
+
+  .section-inner {
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    display: inline-block;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-d);
+    margin-bottom: 14px;
+  }
+
+  .section-inner > h2 {
+    font-size: clamp(1.6rem, 3.5vw, 2.25rem);
+    font-weight: 700;
+    color: var(--navy);
+    max-width: 640px;
+    margin-bottom: 48px;
+  }
+
+  /* CARDS GRID */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 32px 28px 30px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '';
+    display: block;
+    height: 3px;
+    background: var(--accent);
+    border-radius: 3px 3px 0 0;
+    position: absolute;
+    top: 0; left: 0; right: 0;
+  }
+
+  .card-icon {
+    font-size: 2rem;
+    margin-bottom: 14px;
+    display: block;
+  }
+
+  .card h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 10px;
+  }
+
+  .card p {
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  /* CALLOUT BOX */
+  .callout {
+    background: #fff8f0;
+    border: 1px solid #fad5a0;
+    border-left: 4px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 24px 28px;
+    font-size: 1rem;
+    color: #4a3010;
+    font-weight: 500;
+    line-height: 1.65;
+  }
+
+  /* COMPARISON */
+  .comparison-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin-top: 12px;
+  }
+
+  .comp-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 32px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .comp-card.accent-border {
+    border: 2px solid var(--accent);
+  }
+
+  .comp-card::before {
+    content: '';
+    display: block;
+    height: 3px;
+    border-radius: 3px 3px 0 0;
+    position: absolute;
+    top: 0; left: 0; right: 0;
+  }
+
+  .comp-card.bad::before { background: #e55; }
+  .comp-card.good::before { background: var(--accent); }
+
+  .comp-label {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .comp-card.bad .comp-label { color: #c33; }
+  .comp-card.good .comp-label { color: #2a8a3e; }
+
+  .comp-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .comp-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.97rem;
+    color: var(--muted);
+  }
+
+  .comp-list.good-list li { color: #1c2333; }
+
+  .comp-icon {
+    flex-shrink: 0;
+    font-size: 1rem;
+    margin-top: 1px;
+  }
+
+  /* OFFER CARD */
+  .offer-wrap {
+    display: flex;
+    justify-content: center;
+  }
+
+  .offer-card {
+    background: var(--card);
+    border: 2px solid var(--accent);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 42px 40px 38px;
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .offer-card::before {
+    content: '';
+    display: block;
+    height: 4px;
+    background: var(--accent);
+    border-radius: 3px 3px 0 0;
+    position: absolute;
+    top: 0; left: 0; right: 0;
+  }
+
+  .scarcity-badge {
+    display: inline-block;
+    background: #fff3e0;
+    border: 1px solid #fad5a0;
+    color: #a05a00;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 999px;
+    margin-bottom: 28px;
+  }
+
+  .offer-checklist {
+    list-style: none;
+    text-align: left;
+    margin: 0 auto 32px;
+    max-width: 440px;
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+  }
+
+  .offer-checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 1rem;
+    color: #1c2333;
+    font-weight: 500;
+  }
+
+  .check-icon {
+    color: var(--accent);
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    margin-top: 1px;
+    font-weight: 700;
+  }
+
+  .offer-note {
+    margin-top: 16px;
+    font-size: 13px;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  /* GUARANTEE */
+  .guarantee-box {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 44px 40px;
+    max-width: 680px;
+    margin: 0 auto 32px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .guarantee-box::before {
+    content: '';
+    display: block;
+    height: 3px;
+    background: var(--accent);
+    border-radius: 3px 3px 0 0;
+    position: absolute;
+    top: 0; left: 0; right: 0;
+  }
+
+  .guarantee-icon {
+    font-size: 2.8rem;
+    display: block;
+    margin-bottom: 18px;
+  }
+
+  .guarantee-box p {
+    font-size: 1.08rem;
+    color: #1c2333;
+    font-weight: 500;
+    line-height: 1.7;
+    margin-bottom: 0;
+  }
+
+  .guarantee-scarcity {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.95rem;
+    margin-bottom: 32px;
+    font-style: italic;
+  }
+
+  .guarantee-cta-wrap {
+    text-align: center;
+  }
+
+  /* REVEAL ANIMATION */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.45);
+    text-align: center;
+    padding: 28px 24px;
+    font-size: 13px;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    .topbar { padding: 0 18px; }
+    section { padding: 60px 18px; }
+    .offer-card { padding: 32px 22px 28px; }
+    .guarantee-box { padding: 32px 22px; }
+    .hero { padding: 70px 18px 80px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="logo-mark">
+    <span class="logo-badge">CF</span>
+    Coach Foundation
+  </div>
+  <a class="topbar-cta" href="https://buy.stripe.com/7sY3cv57x8VaaTf16Q6oo17" target="_blank" rel="noopener">Build My AI Tools</a>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="eyebrow-badge">ONLY 25 CUSTOM BUILDS IN THIS ROUND</div>
+  <h1>Three custom AI tools, built around your business.</h1>
+  <p class="hero-sub">One to generate leads. One to create offers. One to close high-ticket clients. Built around your voice, niche and offers — loaded into the ChatGPT you already use. Lifetime access.</p>
+  <a class="btn-primary" href="https://buy.stripe.com/7sY3cv57x8VaaTf16Q6oo17" target="_blank" rel="noopener">Build My AI Tools</a>
+  <p class="hero-note">Backed by our &ldquo;You Keep It Anyway&rdquo; guarantee</p>
+</section>
+
+<!-- SECTION 2 -->
+<section class="white">
+  <div class="section-inner reveal">
+    <span class="section-label">Every Coach Eventually Needs Three Things</span>
+    <h2>Leads. Offers that sell. The right words to close.</h2>
+    <div class="cards-grid">
+      <div class="card">
+        <span class="card-icon">📣</span>
+        <h3>Leads</h3>
+        <p>A steady flow of the right people coming into your world.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">💡</span>
+        <h3>Offers</h3>
+        <p>Offers people actually understand, want, and buy.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">🤝</span>
+        <h3>Sales</h3>
+        <p>Knowing exactly what to say to turn calls into clients.</p>
+      </div>
+    </div>
+    <div class="callout">
+      The old way to get these is years of courses, freelancers and coaches. These three AI tools give you all three capabilities now — built around your business and ready to use.
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3 -->
+<section class="grey">
+  <div class="section-inner reveal">
+    <span class="section-label">What You Get</span>
+    <h2>Three custom-built AI tools. Each with a different job.</h2>
+    <div class="cards-grid">
+      <div class="card">
+        <span class="card-icon">🎯</span>
+        <h3>AI Lead Generator</h3>
+        <p>Your AI marketing team. Creates webinar scripts, emails, ad copy, lead magnets, nurture sequences and warm outreach — around your business.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">🏗️</span>
+        <h3>AI Offer Generator</h3>
+        <p>Your AI offer architect. Shapes low-ticket to high-ticket offers, names, bonuses, pricing and positioning from your business data.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">💬</span>
+        <h3>AI Sales Generator</h3>
+        <p>Your AI sales coach. Builds discovery scripts, follow-ups and objection responses for high-ticket conversations in your voice.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4 -->
+<section class="white">
+  <div class="section-inner reveal">
+    <span class="section-label">Why It&rsquo;s Different</span>
+    <h2>Regular ChatGPT writes. It just doesn&rsquo;t know your business.</h2>
+    <div class="comparison-grid">
+      <div class="comp-card bad">
+        <div class="comp-label">REGULAR CHATGPT</div>
+        <ul class="comp-list">
+          <li><span class="comp-icon">&#10007;</span> Generic, one-size-fits-all output</li>
+          <li><span class="comp-icon">&#10007;</span> Doesn&rsquo;t know your offer or audience</li>
+          <li><span class="comp-icon">&#10007;</span> Doesn&rsquo;t sound like you</li>
+          <li><span class="comp-icon">&#10007;</span> You start from a blank page every time</li>
+        </ul>
+      </div>
+      <div class="comp-card good accent-border">
+        <div class="comp-label">YOUR CUSTOM BUILD</div>
+        <ul class="comp-list good-list">
+          <li><span class="comp-icon" style="color:var(--accent)">&#10003;</span> Built around your voice, niche and offers</li>
+          <li><span class="comp-icon" style="color:var(--accent)">&#10003;</span> Knows your audience and sales process</li>
+          <li><span class="comp-icon" style="color:var(--accent)">&#10003;</span> Output that sounds like you</li>
+          <li><span class="comp-icon" style="color:var(--accent)">&#10003;</span> Loaded into the ChatGPT you already use</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 5 -->
+<section class="grey">
+  <div class="section-inner reveal">
+    <span class="section-label">What This Replaces</span>
+    <h2>Like having a whole team — without hiring anyone.</h2>
+    <div class="cards-grid">
+      <div class="card">
+        <span class="card-icon">✍️</span>
+        <h3>A Marketing Team</h3>
+        <p>Copywriters, scriptwriters and funnel writers — handled by your Lead Generator.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">📐</span>
+        <h3>An Offer Strategist</h3>
+        <p>Offer structure, positioning and value-ladder help — handled by your Offer Generator.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">🎙️</span>
+        <h3>A Sales Coach</h3>
+        <p>Scripts, follow-ups and objection handling — handled by your Sales Generator.</p>
+      </div>
+    </div>
+    <div class="callout">
+      Each tool does the job of a specialist you&rsquo;d otherwise hire — or spend years learning to be. Built around your business and ready the moment you need it.
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 6 -->
+<section class="white">
+  <div class="section-inner reveal">
+    <span class="section-label">Everything You Get</span>
+    <h2>Three custom AI tools, built around your business.</h2>
+    <div class="offer-wrap">
+      <div class="offer-card">
+        <div class="scarcity-badge">ONLY 25 BUILDS IN THIS ROUND</div>
+        <ul class="offer-checklist">
+          <li><span class="check-icon">&#10003;</span> AI Lead Generator</li>
+          <li><span class="check-icon">&#10003;</span> AI Offer Generator &amp; AI Sales Generator</li>
+          <li><span class="check-icon">&#10003;</span> Custom-built around your voice, niche, offers and sales process</li>
+          <li><span class="check-icon">&#10003;</span> Loaded into the ChatGPT you already use &mdash; no new app to learn</li>
+          <li><span class="check-icon">&#10003;</span> Yours to keep and use for the long run</li>
+        </ul>
+        <a class="btn-primary" href="https://buy.stripe.com/7sY3cv57x8VaaTf16Q6oo17" target="_blank" rel="noopener">Build My AI Tools</a>
+        <p class="offer-note">Each build is custom-made around your business &mdash; and we&rsquo;re only taking 25 in this round.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 7 -->
+<section class="grey">
+  <div class="section-inner reveal">
+    <span class="section-label">The Guarantee</span>
+    <h2>&ldquo;You Keep It Anyway.&rdquo; Risk-free from day one.</h2>
+    <div class="guarantee-box">
+      <span class="guarantee-icon">🛡️</span>
+      <p>We build your three AI tools around your business and load them into your ChatGPT. You test them, use them, put them to work. If you don&rsquo;t love what we built &mdash; ask for your money back. We refund you, and you keep the tools anyway.</p>
+    </div>
+    <p class="guarantee-scarcity">Only 25 custom builds in this round.</p>
+    <div class="guarantee-cta-wrap">
+      <a class="btn-primary" href="https://buy.stripe.com/7sY3cv57x8VaaTf16Q6oo17" target="_blank" rel="noopener">Build My AI Tools</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2026 Coach Foundation. All rights reserved.</p>
+</footer>
+
+<script>
+  (function() {
+    var els = document.querySelectorAll('.reveal');
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    els.forEach(function(el) { io.observe(el); });
+  })();
+</script>
+
+</body>
+</html>
