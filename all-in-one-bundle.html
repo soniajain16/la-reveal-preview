@@ -643,16 +643,22 @@
     padding-top: 20px;
   }
   .testimonial-avatar {
-    width: 40px; height: 40px;
+    width: 48px; height: 48px;
     border-radius: 50%;
     background: rgba(245,151,43,0.1);
-    border: 1px solid rgba(245,151,43,0.2);
+    border: 2px solid rgba(245,151,43,0.25);
     display: flex; align-items: center; justify-content: center;
     font-size: 13px;
     font-weight: 700;
     color: var(--accent);
     font-family: 'Poppins', sans-serif;
     flex-shrink: 0;
+    overflow: hidden;
+  }
+  .testimonial-avatar img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
   }
   .testimonial-name {
     font-family: 'Poppins', sans-serif;
@@ -796,8 +802,42 @@
     <span class="section-label">Real Results</span>
     <h2>What happens when the<br>engine is <span class="accent">running</span>.</h2>
 
-    <!-- Launch Marketing Accelerator -->
+    <!-- Launch Accelerator -->
     <div class="proof-product-block" style="margin-top: 56px;">
+      <div class="proof-product-label">
+        <span class="proof-product-tag">🚀 Launch Accelerator</span>
+      </div>
+      <div class="testimonials-grid">
+
+        <div class="testimonial-card reveal">
+          <div class="testimonial-result">Everything built end-to-end in two weeks</div>
+          <p class="testimonial-text">"It was incredibly easy working with Sai - in two weeks they built everything end to end. Client conversion rates have gone through the roof."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar"><img src="https://storage.googleapis.com/msgsndr/dlOiFolz34waoaWyDVPS/media/68e4e48d1c4c0062e07de079.png" alt="Luke Charleton"></div>
+            <div>
+              <div class="testimonial-name">Luke Charleton</div>
+              <div class="testimonial-context">Chief of I Love Coaching Magazine</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card reveal">
+          <div class="testimonial-result">Massive results &amp; leads across the coaching roster</div>
+          <p class="testimonial-text">"Sai builds the technology and funnels which create massive results and leads for all of our coaches."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar"><img src="https://storage.googleapis.com/msgsndr/dlOiFolz34waoaWyDVPS/media/68baaf0122e8c72199d0e89f.jpeg" alt="Peter Thompson"></div>
+            <div>
+              <div class="testimonial-name">Peter Thompson</div>
+              <div class="testimonial-context">Best Selling Author, Coach &amp; Speaker</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Launch Marketing Accelerator -->
+    <div class="proof-product-block">
       <div class="proof-product-label">
         <span class="proof-product-tag">📣 Launch Marketing Accelerator</span>
       </div>
@@ -805,11 +845,11 @@
 
         <div class="testimonial-card reveal">
           <div class="testimonial-result">Under $10K/month → $300K in 90 days</div>
-          <p class="testimonial-text">Generated $300K during the 90-day program itself - going from under $10K a month to breaking through in a single quarter.</p>
+          <p class="testimonial-text">Michael came into the program doing under $10K/month and generated $300K during the 90-day program itself.</p>
           <div class="testimonial-author">
-            <div class="testimonial-avatar">MB</div>
+            <div class="testimonial-avatar"><img src="https://assets.cdn.filesafe.space/dlOiFolz34waoaWyDVPS/media/6a2bfd7764042ec872de3c6e.jpg" alt="Michael Beavis"></div>
             <div>
-              <div class="testimonial-name">Michael Bevis</div>
+              <div class="testimonial-name">Michael Beavis</div>
               <div class="testimonial-context">Launch Marketing Accelerator</div>
             </div>
           </div>
@@ -817,9 +857,9 @@
 
         <div class="testimonial-card reveal">
           <div class="testimonial-result">Multiple programs &amp; major partnerships unlocked</div>
-          <p class="testimonial-text">Had strong connections but lacked the system to convert them. Once the right ecosystem was in place, she expanded into multiple programs and opened major partnership conversations.</p>
+          <p class="testimonial-text">Ananta had strong connections, but did not have the system to convert them. Once the right ecosystem was in place, she was able to expand into multiple programs and open major partnership conversations.</p>
           <div class="testimonial-author">
-            <div class="testimonial-avatar">A</div>
+            <div class="testimonial-avatar"><img src="https://assets.cdn.filesafe.space/dlOiFolz34waoaWyDVPS/media/6a214b6283cb7337aa0b053b.png" alt="Ananta"></div>
             <div>
               <div class="testimonial-name">Ananta</div>
               <div class="testimonial-context">Launch Marketing Accelerator</div>
@@ -841,7 +881,7 @@
           <div class="testimonial-result">$4K → $11K → $18K across three launches</div>
           <p class="testimonial-text">"I wake up to PayPal notifications instead of chasing clients."</p>
           <div class="testimonial-author">
-            <div class="testimonial-avatar">K</div>
+            <div class="testimonial-avatar"><img src="https://storage.googleapis.com/msgsndr/dlOiFolz34waoaWyDVPS/media/68aebfbc2716021814396d6d.jpeg" alt="Kaley"></div>
             <div>
               <div class="testimonial-name">Kaley</div>
               <div class="testimonial-context">Coach &amp; Funnel Builder</div>
@@ -853,7 +893,7 @@
           <div class="testimonial-result">10–15 new students/week at $97 each</div>
           <p class="testimonial-text">"My funnel brings in clients while I focus on coaching."</p>
           <div class="testimonial-author">
-            <div class="testimonial-avatar">S</div>
+            <div class="testimonial-avatar"><img src="https://storage.googleapis.com/msgsndr/dlOiFolz34waoaWyDVPS/media/68c14f906880bf46aebaaf97.png" alt="Sarah"></div>
             <div>
               <div class="testimonial-name">Sarah</div>
               <div class="testimonial-context">Business Coach</div>
