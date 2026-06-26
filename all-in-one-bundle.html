@@ -674,6 +674,57 @@
 
   .proof-product-block { margin-top: 48px; }
 
+  /* Press placement cards (MOD) */
+  .press-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 48px;
+  }
+  .press-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+  }
+  .press-screenshot {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    display: block;
+    border-bottom: 1px solid var(--line);
+  }
+  .press-card-body {
+    padding: 16px 18px 18px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .press-pub {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .press-client-name {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--navy);
+  }
+  .press-client-title {
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+  @media (max-width: 768px) { .press-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .press-grid { grid-template-columns: 1fr; } }
+
   /* SCROLL REVEAL */
   .reveal {
     opacity: 0;
@@ -898,6 +949,52 @@
               <div class="testimonial-name">Sarah</div>
               <div class="testimonial-context">Business Coach</div>
             </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Media On Demand -->
+    <div class="proof-product-block">
+      <div class="proof-product-label">
+        <span class="proof-product-tag">📰 Media On Demand</span>
+      </div>
+      <div class="press-grid">
+
+        <div class="press-card reveal">
+          <img class="press-screenshot" src="https://assets.cdn.filesafe.space/dlOiFolz34waoaWyDVPS/media/6a0af7bdc56db4013f91a72b.png" alt="Adina Rivers featured in Forbes">
+          <div class="press-card-body">
+            <div class="press-pub">Forbes</div>
+            <div class="press-client-name">Adina Rivers</div>
+            <div class="press-client-title">Relationship Coach</div>
+          </div>
+        </div>
+
+        <div class="press-card reveal">
+          <img class="press-screenshot" src="https://assets.cdn.filesafe.space/dlOiFolz34waoaWyDVPS/media/6a0b0600ea36308bcf8d0019.png" alt="Kaylee featured in Startup Growth">
+          <div class="press-card-body">
+            <div class="press-pub">Startup Growth</div>
+            <div class="press-client-name">Kaylee</div>
+            <div class="press-client-title">Coach</div>
+          </div>
+        </div>
+
+        <div class="press-card reveal">
+          <img class="press-screenshot" src="https://assets.cdn.filesafe.space/dlOiFolz34waoaWyDVPS/media/6a0af220ea36308bcf8c3775.png" alt="Monique press placement">
+          <div class="press-card-body">
+            <div class="press-pub">Press Placement</div>
+            <div class="press-client-name">Monique</div>
+            <div class="press-client-title">Coach</div>
+          </div>
+        </div>
+
+        <div class="press-card reveal">
+          <img class="press-screenshot" src="https://assets.cdn.filesafe.space/dlOiFolz34waoaWyDVPS/media/6a0af847c56db4013f91accc.png" alt="Coach Foundation featured in Forbes, Inc., and Entrepreneur">
+          <div class="press-card-body">
+            <div class="press-pub">Forbes · Inc · Entrepreneur</div>
+            <div class="press-client-name">Coach Foundation</div>
+            <div class="press-client-title">Featured across top publications</div>
           </div>
         </div>
 
