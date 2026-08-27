@@ -76,6 +76,9 @@
   .deliver-head p{margin:0 0 10px;color:rgba(237,237,242,.8);font-size:16px}
   .deliver-head p:last-of-type{margin-bottom:0}
 
+  .substep{display:flex;align-items:baseline;gap:10px;margin:0 0 22px;padding:10px 14px;background:rgba(255,255,255,.04);border-left:2px solid var(--amber);border-radius:8px;color:rgba(237,237,242,.85);font-size:14px;max-width:640px}
+  .substep b{flex:none;font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--amber);font-weight:600}
+
   .mocks{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2vw,22px)}
   @media(max-width:820px){.mocks{grid-template-columns:1fr;max-width:440px;margin:0 auto}}
   .mstep{display:flex;flex-direction:column}
@@ -182,9 +185,10 @@
     <div class="deliver-head">
       <p class="eyebrow">Step 3</p>
       <h2>Get your tool delivered</h2>
-      <p>Within a few working days, your delivery email arrives. Getting in takes three quick steps, shown just below.</p>
-      <p>When your delivery email lands, this is exactly what you'll see. Three screens, and you're in.</p>
+      <p>Within a few working days, your delivery email arrives with the link to your new AI project.</p>
     </div>
+
+    <p class="substep"><b>3.1</b>You'll receive the delivery email with your project link. When you click it, this is exactly what opens — three screens, and you're in.</p>
 
     <div class="acc">
       <!-- 1: LOGIN (open by default) -->
@@ -194,7 +198,7 @@
         </button>
         <div class="acc-body">
           <div class="acc-body-inner">
-            <p class="cline">Click the link in your delivery email. If you are not signed in, sign in the way you normally do. Use the same email you purchased with.</p>
+            <p class="cline">Click the project link in your delivery email. If you're not already signed in, log in to your own ChatGPT account as you normally would — it does not need to be the same email you purchased with.</p>
             <div class="mock">
               <div class="mbar"><i></i><i></i><i></i><span class="maddr">chatgpt.com/auth/login</span></div>
               <div class="screen">
